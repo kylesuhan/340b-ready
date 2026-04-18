@@ -9,8 +9,14 @@ export default function AccountPage() {
   const [fullName, setFullName] = useState('')
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [profileSuccess, setProfileSuccess] = useState(false)
+  const [profileError, setProfileError] = useState<string | null>(null)
+
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [passwordSaving, setPasswordSaving] = useState(false)
+  const [passwordSuccess, setPasswordSuccess] = useState(false)
+  const [passwordError, setPasswordError] = useState<string | null>(null)
 
   useEffect(() => {
     async function load() {
@@ -31,11 +37,11 @@ export default function AccountPage() {
     load()
   }, [])
 
-  async function handleSave(e: React.FormEvent) {
+  async function handleSaveProfile(e: React.FormEvent) {
     e.preventDefault()
     setSaving(true)
-    setError(null)
-    setSuccess(false)
+    setProfileError(null)
+    setProfileSuccess(false)
     const supabase = createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return
@@ -44,11 +50,36 @@ export default function AccountPage() {
       .update({ full_name: fullName })
       .eq('id', user.id)
     if (error) {
-      setError(error.message)
+      setProfileError(error.message)
     } else {
-      setSuccess(true)
+      setProfileSuccess(true)
     }
     setSaving(false)
+  }
+
+  async function handleChangePassword(e: React.FormEvent) {
+    e.preventDefault()
+    setPasswordError(null)
+    setPasswordSuccess(false)
+    if (newPassword !== confirmPassword) {
+      setPasswordError('Passwords do not match.')
+      return
+    }
+    if (newPassword.length < 8) {
+      setPasswordError('Password must be at least 8 characters.')
+      return
+    }
+    setPasswordSaving(true)
+    const supabase = createClient()
+    const { error } = await supabase.auth.updateUser({ password: newPassword })
+    if (error) {
+      setPasswordError(error.message)
+    } else {
+      setPasswordSuccess(true)
+      setNewPassword('')
+      setConfirmPassword('')
+    }
+    setPasswordSaving(false)
   }
 
   if (loading) {
@@ -62,17 +93,18 @@ export default function AccountPage() {
         <p className="text-slate-500 text-sm mt-1">Manage your account settings.</p>
       </div>
 
+      {/* Profile */}
       <div className="bg-white border border-slate-200 rounded-xl p-6 space-y-4">
         <h2 className="text-sm font-semibold text-slate-900">Profile</h2>
-        {success && (
+        {profileSuccess && (
           <div className="text-sm text-green-700 bg-green-50 border border-green-200 p-3 rounded-lg">
             Saved successfully.
           </div>
         )}
-        {error && (
-          <div className="text-sm text-red-700 bg-red-50 border border-red-200 p-3 rounded-lg">{error}</div>
+        {profileError && (
+          <div className="text-sm text-red-700 bg-red-50 border border-red-200 p-3 rounded-lg">{profileError}</div>
         )}
-        <form onSubmit={handleSave} className="space-y-4">
+        <form onSubmit={handleSaveProfile} className="space-y-4">
           <div>
             <label className="block text-xs font-medium text-slate-500 mb-1">Email</label>
             <p className="text-sm text-slate-700">{profile?.email}</p>
@@ -83,30 +115,78 @@ export default function AccountPage() {
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-teal"
               placeholder="Your name"
             />
           </div>
           <button
             type="submit"
             disabled={saving}
-            className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium px-4 py-2 rounded-lg text-sm transition-colors"
+            className="bg-brand-navy hover:bg-brand-navy-dark disabled:opacity-50 text-white font-medium px-4 py-2 rounded-lg text-sm transition-colors"
           >
             {saving ? 'Saving…' : 'Save changes'}
           </button>
         </form>
       </div>
 
+      {/* Change password */}
+      <div className="bg-white border border-slate-200 rounded-xl p-6 space-y-4">
+        <h2 className="text-sm font-semibold text-slate-900">Change password</h2>
+        {passwordSuccess && (
+          <div className="text-sm text-green-700 bg-green-50 border border-green-200 p-3 rounded-lg">
+            Password updated successfully.
+          </div>
+        )}
+        {passwordError && (
+          <div className="text-sm text-red-700 bg-red-50 border border-red-200 p-3 rounded-lg">{passwordError}</div>
+        )}
+        <form onSubmit={handleChangePassword} className="space-y-4">
+          <div>
+            <label className="block text-xs font-medium text-slate-700 mb-1">New password</label>
+            <input
+              type="password"
+              required
+              minLength={8}
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-teal"
+              placeholder="At least 8 characters"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-slate-700 mb-1">Confirm new password</label>
+            <input
+              type="password"
+              required
+              minLength={8}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-teal"
+              placeholder="Repeat your new password"
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={passwordSaving}
+            className="bg-brand-navy hover:bg-brand-navy-dark disabled:opacity-50 text-white font-medium px-4 py-2 rounded-lg text-sm transition-colors"
+          >
+            {passwordSaving ? 'Updating…' : 'Update password'}
+          </button>
+        </form>
+      </div>
+
+      {/* Subscription */}
       <div className="bg-white border border-slate-200 rounded-xl p-6">
         <h2 className="text-sm font-semibold text-slate-900 mb-3">Subscription</h2>
         <Link
           href="/account/billing"
-          className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+          className="text-sm text-brand-teal hover:text-brand-teal-dark font-medium"
         >
           Manage subscription →
         </Link>
       </div>
 
+      {/* Sign out */}
       <div className="bg-white border border-slate-200 rounded-xl p-6">
         <h2 className="text-sm font-semibold text-slate-900 mb-3">Sign out</h2>
         <form action="/api/auth/signout" method="post">

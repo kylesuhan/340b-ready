@@ -3,7 +3,7 @@ import { createServerClient } from '@supabase/ssr'
 
 const PROTECTED_PREFIXES = ['/dashboard', '/modules', '/quiz', '/account', '/upgrade']
 const ADMIN_PREFIX = '/admin'
-const AUTH_PATHS = ['/login', '/signup', '/forgot-password', '/reset-password']
+const AUTH_PATHS = ['/login', '/signup', '/forgot-password']
 
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({ request })

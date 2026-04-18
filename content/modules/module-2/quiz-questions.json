@@ -1,0 +1,112 @@
+[
+  {
+    "question_text": "Under the 1996 HRSA patient definition guidance, which of the following is a required element for an individual to be considered a 340B patient?",
+    "answers": [
+      { "id": "a", "text": "The individual must be uninsured", "is_correct": false },
+      { "id": "b", "text": "The covered entity must maintain a record of the individual as its patient", "is_correct": true },
+      { "id": "c", "text": "The individual must be a Medicaid beneficiary", "is_correct": false },
+      { "id": "d", "text": "The individual must be seen on-site at the covered entity", "is_correct": false }
+    ],
+    "explanation": "HRSA's patient definition requires: (1) established relationship, (2) care from a covered entity provider, and (3) records maintained. The patient need not be uninsured or on-site.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "A duplicate discount occurs when:",
+    "answers": [
+      { "id": "a", "text": "A covered entity purchases the same drug from two manufacturers", "is_correct": false },
+      { "id": "b", "text": "A drug benefits from both a 340B discounted price AND a Medicaid rebate for the same unit", "is_correct": true },
+      { "id": "c", "text": "A patient fills the same prescription twice in one month", "is_correct": false },
+      { "id": "d", "text": "Two covered entities share the same contract pharmacy", "is_correct": false }
+    ],
+    "explanation": "A duplicate discount occurs when a covered entity purchases a drug at the 340B price AND the state Medicaid program also collects a manufacturer rebate for that same unit.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "Under a Medicaid 'carve-out' approach, a covered entity:",
+    "answers": [
+      { "id": "a", "text": "Bills Medicaid for 340B drugs and claims the rebate simultaneously", "is_correct": false },
+      { "id": "b", "text": "Excludes 340B drugs from Medicaid claims to avoid duplicate discounts", "is_correct": true },
+      { "id": "c", "text": "Carves out high-cost specialty drugs from 340B purchasing", "is_correct": false },
+      { "id": "d", "text": "Bills Medicare instead of Medicaid for all 340B drugs", "is_correct": false }
+    ],
+    "explanation": "Under carve-out, the covered entity does not use 340B-purchased drugs when billing Medicaid, thereby avoiding the prohibition on duplicate discounts.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "What is drug diversion in the context of the 340B program?",
+    "answers": [
+      { "id": "a", "text": "Purchasing drugs through unauthorized wholesalers", "is_correct": false },
+      { "id": "b", "text": "Dispensing 340B drugs to individuals who are not 340B-eligible patients of the covered entity", "is_correct": true },
+      { "id": "c", "text": "Substituting a generic drug for a brand drug without patient consent", "is_correct": false },
+      { "id": "d", "text": "Transferring drugs between two covered entity sites", "is_correct": false }
+    ],
+    "explanation": "Drug diversion is the transfer or sale of 340B-purchased drugs to ineligible individuals. It is explicitly prohibited by the 340B statute.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "Which of the following entity types is prohibited from using 340B pricing for orphan drugs?",
+    "answers": [
+      { "id": "a", "text": "Federally Qualified Health Centers (FQHCs)", "is_correct": false },
+      { "id": "b", "text": "Children's hospitals enrolled as DSH hospitals", "is_correct": true },
+      { "id": "c", "text": "Ryan White grantees", "is_correct": false },
+      { "id": "d", "text": "Native Hawaiian health programs", "is_correct": false }
+    ],
+    "explanation": "Under the ACA, certain hospital types (children's hospitals, critical access hospitals, free-standing cancer hospitals, rural referral centers, sole community hospitals) cannot use 340B pricing for orphan drugs. FQHCs and Ryan White grantees have no orphan drug exclusion.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "Split-billing software is primarily used to:",
+    "answers": [
+      { "id": "a", "text": "Calculate the ceiling price for a given NDC", "is_correct": false },
+      { "id": "b", "text": "Track and separate 340B-eligible patient transactions from non-eligible ones to prevent diversion and duplicate discounts", "is_correct": true },
+      { "id": "c", "text": "Automatically submit Medicaid claims on behalf of covered entities", "is_correct": false },
+      { "id": "d", "text": "Generate OPAIS enrollment forms", "is_correct": false }
+    ],
+    "explanation": "Split-billing software helps covered entities identify 340B-eligible patients at the point of dispensing, ensuring 340B drugs are only purchased for eligible patients.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "An established relationship with a 340B patient requires that the provider at the covered entity:",
+    "answers": [
+      { "id": "a", "text": "Be a licensed pharmacist employed by the covered entity", "is_correct": false },
+      { "id": "b", "text": "Have clinical responsibility for the individual's care", "is_correct": true },
+      { "id": "c", "text": "Have seen the patient within the last 30 days", "is_correct": false },
+      { "id": "d", "text": "Refer the patient to an in-house pharmacy only", "is_correct": false }
+    ],
+    "explanation": "The HRSA patient definition requires the individual to receive health care from a provider who has clinical responsibility — not merely an administrative referral.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "Which primary safeguard prevents duplicate discounts for Medicaid fee-for-service claims at contract pharmacies?",
+    "answers": [
+      { "id": "a", "text": "Contract pharmacy audit reports submitted to HRSA quarterly", "is_correct": false },
+      { "id": "b", "text": "Covered entities maintaining inventory separation or virtual inventory tracking that excludes 340B claims from Medicaid rebate billing", "is_correct": true },
+      { "id": "c", "text": "Medicaid automatically waives rebate claims for covered entities", "is_correct": false },
+      { "id": "d", "text": "HRSA issues a blanket exemption for contract pharmacies", "is_correct": false }
+    ],
+    "explanation": "Covered entities must track which prescriptions are billed to Medicaid. When a 340B drug is billed to Medicaid FFS, the covered entity must ensure no manufacturer rebate is also collected on that unit.",
+    "difficulty_tag": "scenario"
+  },
+  {
+    "question_text": "Which of the following is a covered outpatient drug under the 340B program?",
+    "answers": [
+      { "id": "a", "text": "A drug administered to a patient admitted as an inpatient", "is_correct": false },
+      { "id": "b", "text": "An FDA-approved prescription drug dispensed to an outpatient of the covered entity", "is_correct": true },
+      { "id": "c", "text": "An over-the-counter medication", "is_correct": false },
+      { "id": "d", "text": "A DESI drug found to be less than effective", "is_correct": false }
+    ],
+    "explanation": "340B covered outpatient drugs are FDA-approved (or DESI-effective) drugs dispensed to outpatients. Inpatient drugs, OTCs, and DESI-ineffective drugs are excluded.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "Under a Medicaid managed care carve-in arrangement, which additional step must a covered entity take to avoid duplicate discounts?",
+    "answers": [
+      { "id": "a", "text": "Stop purchasing all drugs at 340B prices for MCO-covered patients", "is_correct": false },
+      { "id": "b", "text": "Implement controls so that claims for 340B-purchased drugs are flagged to prevent manufacturers from paying rebates on those same units", "is_correct": true },
+      { "id": "c", "text": "Submit all MCO claims through HRSA before billing the MCO", "is_correct": false },
+      { "id": "d", "text": "Obtain a waiver from the state Medicaid agency each calendar year", "is_correct": false }
+    ],
+    "explanation": "In carve-in states, the covered entity must flag 340B-purchased drug transactions so that the state/MCO does not also collect a manufacturer rebate on those units — preventing the duplicate discount.",
+    "difficulty_tag": "scenario"
+  }
+]

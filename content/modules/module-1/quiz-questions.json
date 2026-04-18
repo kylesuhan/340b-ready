@@ -1,0 +1,90 @@
+[
+  {
+    "question_text": "In what year was the 340B Drug Pricing Program established?",
+    "answers": [
+      { "id": "a", "text": "1984", "is_correct": false },
+      { "id": "b", "text": "1990", "is_correct": false },
+      { "id": "c", "text": "1992", "is_correct": true },
+      { "id": "d", "text": "1996", "is_correct": false }
+    ],
+    "explanation": "The 340B program was created by Section 602 of the Veterans Health Care Act of 1992, codified at 42 U.S.C. § 256b.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "Which federal agency administers the 340B Drug Pricing Program?",
+    "answers": [
+      { "id": "a", "text": "Centers for Medicare & Medicaid Services (CMS)", "is_correct": false },
+      { "id": "b", "text": "Health Resources and Services Administration (HRSA)", "is_correct": true },
+      { "id": "c", "text": "Food and Drug Administration (FDA)", "is_correct": false },
+      { "id": "d", "text": "Office of Inspector General (OIG)", "is_correct": false }
+    ],
+    "explanation": "HRSA's Office of Pharmacy Affairs (OPA) administers the 340B program and maintains OPAIS.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "Which of the following is NOT a covered entity type eligible for the 340B program?",
+    "answers": [
+      { "id": "a", "text": "Federally Qualified Health Center (FQHC)", "is_correct": false },
+      { "id": "b", "text": "Ryan White HIV/AIDS Program grantee", "is_correct": false },
+      { "id": "c", "text": "For-profit independent pharmacy", "is_correct": true },
+      { "id": "d", "text": "Disproportionate Share Hospital (DSH)", "is_correct": false }
+    ],
+    "explanation": "For-profit independent pharmacies are not eligible covered entities. Covered entities are specific safety-net providers defined in the statute.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "What is the primary benefit of 340B pricing for covered entities?",
+    "answers": [
+      { "id": "a", "text": "Federal grant funding for pharmacy operations", "is_correct": false },
+      { "id": "b", "text": "Purchase of outpatient drugs at or below ceiling prices", "is_correct": true },
+      { "id": "c", "text": "Exemption from state pharmacy licensing", "is_correct": false },
+      { "id": "d", "text": "Priority access to drug shortage allocations", "is_correct": false }
+    ],
+    "explanation": "340B allows covered entities to purchase covered outpatient drugs at or below a statutory ceiling price, stretching scarce federal resources.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "What does OPAIS stand for?",
+    "answers": [
+      { "id": "a", "text": "Office of Pharmacy Assistance and Integrated Services", "is_correct": false },
+      { "id": "b", "text": "Outpatient Pharmacy Access and Information System", "is_correct": false },
+      { "id": "c", "text": "Office of Pharmacy Affairs Information System", "is_correct": true },
+      { "id": "d", "text": "Outpatient Program Administration and Integrity System", "is_correct": false }
+    ],
+    "explanation": "OPAIS (Office of Pharmacy Affairs Information System) is the HRSA database where covered entities register and maintain their 340B program information.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "Which statute is the primary legal basis for the 340B program?",
+    "answers": [
+      { "id": "a", "text": "Social Security Act Section 1927", "is_correct": false },
+      { "id": "b", "text": "Public Health Service Act Section 340B (42 U.S.C. § 256b)", "is_correct": true },
+      { "id": "c", "text": "Affordable Care Act Section 3022", "is_correct": false },
+      { "id": "d", "text": "Drug Price Competition and Patent Term Restoration Act", "is_correct": false }
+    ],
+    "explanation": "The 340B program is codified at Section 340B of the Public Health Service Act, 42 U.S.C. § 256b.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "A Disproportionate Share Hospital (DSH) must meet a minimum DSH adjustment percentage to qualify for 340B. What is that threshold?",
+    "answers": [
+      { "id": "a", "text": "5%", "is_correct": false },
+      { "id": "b", "text": "11.75%", "is_correct": true },
+      { "id": "c", "text": "25%", "is_correct": false },
+      { "id": "d", "text": "30%", "is_correct": false }
+    ],
+    "explanation": "DSH hospitals must have a Medicare DSH adjustment percentage greater than 11.75% to be eligible for 340B.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "Which of the following drug types is generally NOT eligible as a covered outpatient drug under 340B?",
+    "answers": [
+      { "id": "a", "text": "FDA-approved biologics dispensed to outpatients", "is_correct": false },
+      { "id": "b", "text": "Inpatient drugs used during an inpatient hospital stay", "is_correct": true },
+      { "id": "c", "text": "Specialty drugs dispensed to registered patients", "is_correct": false },
+      { "id": "d", "text": "Vaccines dispensed on an outpatient basis", "is_correct": false }
+    ],
+    "explanation": "Inpatient drugs (those reimbursed as part of an inpatient stay under PPS/DRG) are excluded. 340B applies to covered outpatient drugs only.",
+    "difficulty_tag": "applied"
+  }
+]

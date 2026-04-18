@@ -1,0 +1,167 @@
+[
+  {
+    "question_text": "A DSH hospital has registered its hospital-based outpatient oncology clinic as a child site in OPAIS. A physician employed by the hospital sees a Medicare patient there for ongoing chemotherapy. The patient fills their prescriptions at a registered contract pharmacy. Which statement is most accurate about this patient's 340B eligibility?",
+    "answers": [
+      { "id": "a", "text": "The patient does not qualify because chemotherapy drugs are specialty drugs excluded from 340B", "is_correct": false },
+      { "id": "b", "text": "The patient qualifies — established relationship, care from an employed provider at a registered site, records maintained", "is_correct": true },
+      { "id": "c", "text": "The patient does not qualify because Medicare patients cannot be 340B patients", "is_correct": false },
+      { "id": "d", "text": "The patient qualifies only if they are also a Medicaid beneficiary", "is_correct": false }
+    ],
+    "explanation": "This patient meets all three parts of the patient definition: established relationship (ongoing chemo), care from an employed hospital provider at a registered child site, and records maintained. Medicare patients can be 340B patients.",
+    "difficulty_tag": "scenario"
+  },
+  {
+    "question_text": "HRSA's CMP authority against manufacturers for knowingly and intentionally overcharging covered entities is derived from which statutory provision?",
+    "answers": [
+      { "id": "a", "text": "Section 1927 of the Social Security Act", "is_correct": false },
+      { "id": "b", "text": "42 U.S.C. § 256b(d)(1)(B)(vi) as amended by the ACA", "is_correct": true },
+      { "id": "c", "text": "False Claims Act, 31 U.S.C. § 3729", "is_correct": false },
+      { "id": "d", "text": "HIPAA Privacy Rule enforcement provisions", "is_correct": false }
+    ],
+    "explanation": "HRSA asserts CMP authority under Section 340B(d)(1)(B)(vi), added by the ACA, authorizing CMPs against manufacturers that knowingly and intentionally overcharge covered entities.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "In AHA v. Becerra (2022), the Supreme Court ruled that CMS violated the Medicare statute because:",
+    "answers": [
+      { "id": "a", "text": "It reduced reimbursement for all outpatient drugs, not just 340B hospitals", "is_correct": false },
+      { "id": "b", "text": "It set a different reimbursement rate for 340B hospitals without first conducting the required survey of hospital acquisition costs", "is_correct": true },
+      { "id": "c", "text": "The 340B program is unconstitutional as applied to DSH hospitals", "is_correct": false },
+      { "id": "d", "text": "Manufacturers are not required to offer 340B pricing through contract pharmacies", "is_correct": false }
+    ],
+    "explanation": "The Supreme Court unanimously held that CMS violated the statute by reducing 340B hospital Part B reimbursement to ASP-22.5% without first conducting an acquisition cost survey as required by law.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "A covered entity participates in a Medicaid managed care carve-in state. It dispenses 340B-purchased drugs to MCO patients and bills the MCO. Which statement best describes the duplicate discount risk?",
+    "answers": [
+      { "id": "a", "text": "No risk — MCO payments are not subject to MDRP rebates", "is_correct": false },
+      { "id": "b", "text": "Risk exists because the carve-in arrangement may require manufacturers to pay rebates on MCO claims for the same drug unit purchased at 340B price", "is_correct": true },
+      { "id": "c", "text": "Duplicate discount rules only apply to Medicaid FFS, never MCO", "is_correct": false },
+      { "id": "d", "text": "The covered entity can eliminate risk by notifying the MCO of the 340B purchase", "is_correct": false }
+    ],
+    "explanation": "In carve-in states, manufacturers owe rebates on MCO-paid claims. If the same drug was also purchased at the 340B price, a duplicate discount occurs. The covered entity must implement controls to prevent this.",
+    "difficulty_tag": "scenario"
+  },
+  {
+    "question_text": "An OIG report on 340B compliance found that many covered entities lacked adequate documentation in which critical area?",
+    "answers": [
+      { "id": "a", "text": "Failure to use HRSA-approved TPA software", "is_correct": false },
+      { "id": "b", "text": "Inability to demonstrate that patients receiving 340B drugs at contract pharmacies had an established relationship with a covered entity provider", "is_correct": true },
+      { "id": "c", "text": "Charging patients more than the 340B acquisition cost", "is_correct": false },
+      { "id": "d", "text": "Not re-enrolling contract pharmacies in OPAIS annually", "is_correct": false }
+    ],
+    "explanation": "OIG studies found that some covered entities could not document that patients receiving drugs through contract pharmacies met the HRSA patient definition — the most fundamental compliance requirement.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "Under Medicare Part B, the spread between the 340B ceiling price and the ASP+6% reimbursement is:",
+    "answers": [
+      { "id": "a", "text": "Considered illegal self-dealing and subject to False Claims Act liability", "is_correct": false },
+      { "id": "b", "text": "A legitimate margin that covered entities use to cross-subsidize care for uninsured patients — an intended benefit of the program", "is_correct": true },
+      { "id": "c", "text": "Required to be refunded to Medicare as a duplicate discount", "is_correct": false },
+      { "id": "d", "text": "Prohibited under HRSA guidance issued after AHA v. Becerra", "is_correct": false }
+    ],
+    "explanation": "The spread between 340B acquisition cost and Medicare Part B reimbursement is an intentional program benefit — it allows covered entities to generate resources to support care for vulnerable populations.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "A covered entity's TPA flags 120 prescriptions as potentially dispensed to non-patients. The compliance team validates 85 were genuine failures. Best practice requires:",
+    "answers": [
+      { "id": "a", "text": "No action if the number is below 500 events", "is_correct": false },
+      { "id": "b", "text": "Voluntary disclosure to HRSA, quantification of 340B discount on the 85 transactions, and proactive repayment to affected manufacturers", "is_correct": true },
+      { "id": "c", "text": "Terminating the TPA agreement before taking any other action", "is_correct": false },
+      { "id": "d", "text": "Seeking a HRSA waiver before taking corrective action", "is_correct": false }
+    ],
+    "explanation": "Voluntary self-disclosure, quantification of the benefit received, and proactive repayment is the recognized best practice for self-identified violations.",
+    "difficulty_tag": "scenario"
+  },
+  {
+    "question_text": "A hospital registers a new off-campus PBOD and wants to immediately begin purchasing 340B drugs for patients seen there. What must happen first?",
+    "answers": [
+      { "id": "a", "text": "The PBOD must see at least 100 340B-eligible patients before registration is effective", "is_correct": false },
+      { "id": "b", "text": "The PBOD must be registered as a child site in OPAIS and the registration must be active before 340B purchasing begins", "is_correct": true },
+      { "id": "c", "text": "The covered entity must notify all contract pharmacies within 24 hours of the new site opening", "is_correct": false },
+      { "id": "d", "text": "The hospital must obtain a separate HRSA authorization letter for each new PBOD", "is_correct": false }
+    ],
+    "explanation": "340B purchasing for a new site may only begin after that site is actively registered in OPAIS. Purchasing before registration is a compliance violation.",
+    "difficulty_tag": "scenario"
+  },
+  {
+    "question_text": "A manufacturer's representative tells a covered entity that 340B pricing will only be provided if the covered entity shares patient-level prescription data. The covered entity should:",
+    "answers": [
+      { "id": "a", "text": "Comply fully since manufacturers have audit rights over all data", "is_correct": false },
+      { "id": "b", "text": "Refuse — HRSA has stated manufacturers cannot condition 340B pricing on patient-level data disclosure — and report the demand to HRSA", "is_correct": true },
+      { "id": "c", "text": "Provide de-identified data only to satisfy the demand", "is_correct": false },
+      { "id": "d", "text": "Agree since HIPAA allows sharing with business associates", "is_correct": false }
+    ],
+    "explanation": "HRSA has stated that conditioning 340B pricing on patient-level data is itself a violation. The covered entity should refuse and report the demand to HRSA.",
+    "difficulty_tag": "scenario"
+  },
+  {
+    "question_text": "Under 42 U.S.C. § 256b(d)(1)(B), civil monetary penalties for knowing and intentional overcharging are set at up to:",
+    "answers": [
+      { "id": "a", "text": "$5,000 per violation", "is_correct": false },
+      { "id": "b", "text": "$5,000 per instance, capped at $1 million total", "is_correct": false },
+      { "id": "c", "text": "$5,000 per instance plus the amount of the overcharge", "is_correct": true },
+      { "id": "d", "text": "$500,000 per manufacturer per year", "is_correct": false }
+    ],
+    "explanation": "Under 42 U.S.C. § 256b(d)(1)(B), manufacturers face CMPs of up to $5,000 per instance plus required repayment of the overcharge.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "A covered entity receives an HRSA audit notification. The most important documents to gather first are:",
+    "answers": [
+      { "id": "a", "text": "A list of all drugs purchased in the past 12 months at any price", "is_correct": false },
+      { "id": "b", "text": "OPAIS records, contract pharmacy agreements, patient eligibility policies, TPA/split-billing reports, and Medicaid duplicate discount prevention documentation", "is_correct": true },
+      { "id": "c", "text": "Financial statements showing net revenue from 340B savings", "is_correct": false },
+      { "id": "d", "text": "Legal counsel engagement letters to protect all communications", "is_correct": false }
+    ],
+    "explanation": "HRSA audits examine five core areas: patient eligibility, diversion prevention, duplicate discount prevention, contract pharmacy compliance, and OPAIS accuracy. These documents map directly to those areas.",
+    "difficulty_tag": "scenario"
+  },
+  {
+    "question_text": "Which statement best describes the 'established relationship' requirement under the HRSA patient definition for telehealth encounters?",
+    "answers": [
+      { "id": "a", "text": "Telehealth patients can never qualify because they are not physically at the covered entity", "is_correct": false },
+      { "id": "b", "text": "HRSA has indicated telehealth encounters with a covered entity provider can satisfy the patient definition when the covered entity maintains records and the provider has clinical responsibility", "is_correct": true },
+      { "id": "c", "text": "Telehealth patients qualify only if the visit is billed under the covered entity's NPI", "is_correct": false },
+      { "id": "d", "text": "Telehealth qualifies only for Medicare-covered entities", "is_correct": false }
+    ],
+    "explanation": "HRSA's evolving guidance acknowledges telehealth visits can meet the patient definition requirements when the covered entity provider maintains clinical responsibility and patient records.",
+    "difficulty_tag": "scenario"
+  },
+  {
+    "question_text": "Which of the following policy debates is most central to current 340B program reform discussions in Congress?",
+    "answers": [
+      { "id": "a", "text": "Whether FQHCs should be required to use in-house pharmacies only", "is_correct": false },
+      { "id": "b", "text": "Whether large health systems with extensive child site networks use 340B savings in a manner consistent with the program's safety-net mission", "is_correct": true },
+      { "id": "c", "text": "Whether the 340B program should be merged with Medicare Part D", "is_correct": false },
+      { "id": "d", "text": "Whether the program should be limited to hospitals with less than 100 beds", "is_correct": false }
+    ],
+    "explanation": "A central reform debate involves whether large health systems with many registered child sites use 340B savings consistent with the safety-net mission. OIG and Congress have scrutinized this question.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "The 340B program's primary statutory purpose is to:",
+    "answers": [
+      { "id": "a", "text": "Reduce overall healthcare spending by capping all drug prices", "is_correct": false },
+      { "id": "b", "text": "Allow covered entities to stretch scarce resources, reach more eligible patients, and provide more comprehensive services to underserved populations", "is_correct": true },
+      { "id": "c", "text": "Generate revenue for federal Medicaid programs", "is_correct": false },
+      { "id": "d", "text": "Provide price parity between Medicaid and commercial payers", "is_correct": false }
+    ],
+    "explanation": "The 340B program's mission is to enable safety-net covered entities to stretch scarce federal resources to serve more eligible patients with more comprehensive services.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "In a scenario involving a single drug transaction: the covered entity purchased the drug at the 340B price, dispensed it to a Medicaid FFS patient, billed Medicaid FFS, and the state collected a manufacturer rebate. Which violations are implicated?",
+    "answers": [
+      { "id": "a", "text": "Diversion only", "is_correct": false },
+      { "id": "b", "text": "Duplicate discount only", "is_correct": true },
+      { "id": "c", "text": "Both diversion and duplicate discount", "is_correct": false },
+      { "id": "d", "text": "No violation — this is a permitted billing practice", "is_correct": false }
+    ],
+    "explanation": "This transaction implicates the duplicate discount prohibition: the covered entity obtained the 340B price AND Medicaid also received a manufacturer rebate on the same unit. There is no diversion because the drug was dispensed to a patient (not to a non-patient).",
+    "difficulty_tag": "scenario"
+  }
+]

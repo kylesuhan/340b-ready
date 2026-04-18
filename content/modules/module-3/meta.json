@@ -1,0 +1,9 @@
+{
+  "slug": "module-3",
+  "order_index": 3,
+  "title": "OPAIS Registration, Audits, and Manufacturer Compliance",
+  "description": "Deep-dive into OPAIS registration and re-enrollment obligations, HRSA audit processes, self-audit best practices, manufacturer compliance requirements including ceiling price calculations, and corrective action plan requirements.",
+  "difficulty": "intermediate",
+  "is_free": false,
+  "quiz_pass_threshold": 0.80
+}

@@ -1,0 +1,9 @@
+{
+  "slug": "module-4",
+  "order_index": 4,
+  "title": "Contract Pharmacies, Ceiling Price Calculations, and ADR",
+  "description": "Advanced coverage of contract pharmacy frameworks (including post-2020 manufacturer restrictions), third-party administrator roles, ceiling price calculation deep dives including penny pricing, and the ADR process for resolving pricing disputes.",
+  "difficulty": "advanced",
+  "is_free": false,
+  "quiz_pass_threshold": 0.80
+}

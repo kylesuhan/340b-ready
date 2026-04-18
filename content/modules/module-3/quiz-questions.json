@@ -1,0 +1,112 @@
+[
+  {
+    "question_text": "How frequently must covered entities re-enroll in OPAIS?",
+    "answers": [
+      { "id": "a", "text": "Monthly", "is_correct": false },
+      { "id": "b", "text": "Quarterly", "is_correct": false },
+      { "id": "c", "text": "Annually", "is_correct": true },
+      { "id": "d", "text": "Every three years", "is_correct": false }
+    ],
+    "explanation": "Covered entities must re-certify their participation in OPAIS annually. Failure to re-certify results in removal from the program.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "Within how many business days must a covered entity report changes in OPAIS?",
+    "answers": [
+      { "id": "a", "text": "5 business days", "is_correct": false },
+      { "id": "b", "text": "10 business days", "is_correct": true },
+      { "id": "c", "text": "30 calendar days", "is_correct": false },
+      { "id": "d", "text": "60 calendar days", "is_correct": false }
+    ],
+    "explanation": "HRSA requires covered entities to update OPAIS within 10 business days of any material changes.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "During an HRSA audit, which finding would most likely result in a covered entity being required to repay manufacturers?",
+    "answers": [
+      { "id": "a", "text": "Using a contract pharmacy that is more than 40 miles from the covered entity", "is_correct": false },
+      { "id": "b", "text": "Evidence of drug diversion — 340B drugs dispensed to non-patients", "is_correct": true },
+      { "id": "c", "text": "Failure to use the Prime Vendor Program (PVP)", "is_correct": false },
+      { "id": "d", "text": "Purchasing drugs from a secondary wholesaler instead of the Prime Vendor", "is_correct": false }
+    ],
+    "explanation": "Drug diversion is a material violation. When HRSA audits find diversion, covered entities may be required to repay manufacturers the 340B discount received on diverted drugs.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "What is the 340B ceiling price formula?",
+    "answers": [
+      { "id": "a", "text": "Average Manufacturer Price (AMP) minus the Unit Rebate Amount (URA)", "is_correct": true },
+      { "id": "b", "text": "Wholesale Acquisition Cost (WAC) minus 23.1%", "is_correct": false },
+      { "id": "c", "text": "Best Price minus the Medicaid rebate percentage", "is_correct": false },
+      { "id": "d", "text": "Average Sales Price (ASP) minus 6%", "is_correct": false }
+    ],
+    "explanation": "The 340B ceiling price = AMP - URA, where URA is the Medicaid Unit Rebate Amount.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "Which organization operates the Prime Vendor Program on behalf of HRSA?",
+    "answers": [
+      { "id": "a", "text": "McKesson Corporation", "is_correct": false },
+      { "id": "b", "text": "Apexus", "is_correct": true },
+      { "id": "c", "text": "AmerisourceBergen", "is_correct": false },
+      { "id": "d", "text": "340B Health", "is_correct": false }
+    ],
+    "explanation": "Apexus serves as the HRSA-contracted Prime Vendor for the 340B program, negotiating sub-ceiling prices and providing compliance resources.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "What must a covered entity do when an HRSA audit finds a credible allegation of a violation?",
+    "answers": [
+      { "id": "a", "text": "File a lawsuit against HRSA within 30 days", "is_correct": false },
+      { "id": "b", "text": "Submit a corrective action plan (CAP) and, if applicable, repay manufacturers for overcharges or misuse", "is_correct": true },
+      { "id": "c", "text": "Immediately terminate all contract pharmacy agreements", "is_correct": false },
+      { "id": "d", "text": "Request a congressional hearing", "is_correct": false }
+    ],
+    "explanation": "When HRSA finds a violation, the covered entity must submit a corrective action plan. Material violations can require repayment to affected manufacturers.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "Manufacturers are required to make 340B pricing available as a condition of participation in which program?",
+    "answers": [
+      { "id": "a", "text": "Medicare Part D", "is_correct": false },
+      { "id": "b", "text": "Medicaid Drug Rebate Program (MDRP)", "is_correct": true },
+      { "id": "c", "text": "340B Prime Vendor Program", "is_correct": false },
+      { "id": "d", "text": "Federal Supply Schedule", "is_correct": false }
+    ],
+    "explanation": "Manufacturers must participate in the MDRP and, as a condition, must agree to provide covered outpatient drugs to covered entities at or below the 340B ceiling price.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "When a covered entity believes it has been charged more than the 340B ceiling price, what is the proper initial remedy?",
+    "answers": [
+      { "id": "a", "text": "File an ADR complaint immediately with HRSA", "is_correct": false },
+      { "id": "b", "text": "Contact the manufacturer directly to request a refund or credit", "is_correct": true },
+      { "id": "c", "text": "Stop purchasing from that manufacturer entirely", "is_correct": false },
+      { "id": "d", "text": "Report to CMS and request a Medicaid audit", "is_correct": false }
+    ],
+    "explanation": "The first step when overcharged is to contact the manufacturer directly. If unresolved, the ADR process is available.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "Penny pricing applies when:",
+    "answers": [
+      { "id": "a", "text": "The drug's wholesale cost exceeds $100 per unit", "is_correct": false },
+      { "id": "b", "text": "The AMP minus URA formula produces a result at or below zero", "is_correct": true },
+      { "id": "c", "text": "The covered entity purchases fewer than 100 units", "is_correct": false },
+      { "id": "d", "text": "The drug is classified as a specialty pharmaceutical", "is_correct": false }
+    ],
+    "explanation": "Penny pricing occurs when AMP - URA ≤ $0.00, in which case HRSA sets the ceiling price at $0.01.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "Which of the following is a best practice for maintaining 340B audit readiness?",
+    "answers": [
+      { "id": "a", "text": "Conducting self-audits only when HRSA notifies the entity of an upcoming audit", "is_correct": false },
+      { "id": "b", "text": "Maintaining a standing compliance committee, conducting annual self-audits, and keeping TPA reports for at least 3 years", "is_correct": true },
+      { "id": "c", "text": "Limiting contract pharmacy agreements to reduce audit scope", "is_correct": false },
+      { "id": "d", "text": "Delegating all compliance responsibility to the split-billing software vendor", "is_correct": false }
+    ],
+    "explanation": "Audit readiness requires proactive, ongoing compliance activities: standing compliance committee, regular self-audits, document retention, and annual staff training.",
+    "difficulty_tag": "scenario"
+  }
+]

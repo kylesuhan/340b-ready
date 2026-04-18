@@ -1,0 +1,9 @@
+{
+  "slug": "module-2",
+  "order_index": 2,
+  "title": "Patient Eligibility, Eligible Drugs, and Prohibited Practices",
+  "description": "Understand who qualifies as a 340B patient, which drugs are eligible, and the two core prohibitions: drug diversion and duplicate discounts. Learn about split-billing software and Medicaid carve-in vs. carve-out arrangements.",
+  "difficulty": "moderate",
+  "is_free": false,
+  "quiz_pass_threshold": 0.80
+}

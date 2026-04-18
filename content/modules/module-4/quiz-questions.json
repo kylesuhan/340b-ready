@@ -1,0 +1,134 @@
+[
+  {
+    "question_text": "Before the 2010 HRSA guidance, how many contract pharmacy arrangements could most covered entities maintain?",
+    "answers": [
+      { "id": "a", "text": "Unlimited, with no restrictions", "is_correct": false },
+      { "id": "b", "text": "One contract pharmacy per covered entity (for those without an in-house pharmacy)", "is_correct": true },
+      { "id": "c", "text": "Up to five per covered entity", "is_correct": false },
+      { "id": "d", "text": "None — only in-house pharmacies were permitted", "is_correct": false }
+    ],
+    "explanation": "Under 1996 HRSA guidance, covered entities were generally limited to one contract pharmacy arrangement. The 2010 guidance expanded this to allow unlimited arrangements.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "A TPA in the contract pharmacy model primarily manages:",
+    "answers": [
+      { "id": "a", "text": "Drug purchasing on behalf of the covered entity at 340B prices", "is_correct": false },
+      { "id": "b", "text": "Patient eligibility tracking, split-billing, duplicate discount prevention, and replenishment ordering", "is_correct": true },
+      { "id": "c", "text": "HRSA audit functions on behalf of the covered entity", "is_correct": false },
+      { "id": "d", "text": "Contract pharmacy dispensing fee structures", "is_correct": false }
+    ],
+    "explanation": "TPAs provide technology and operational infrastructure for compliance at contract pharmacies — patient eligibility, inventory management, and duplicate discount avoidance.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "What is 'penny pricing' in the 340B context?",
+    "answers": [
+      { "id": "a", "text": "A discount offered by the Prime Vendor for high-volume purchasing", "is_correct": false },
+      { "id": "b", "text": "When the AMP minus URA formula produces a result at or below $0.00, the ceiling price is set at $0.01", "is_correct": true },
+      { "id": "c", "text": "A Medicaid pricing floor preventing drugs from being priced below one cent", "is_correct": false },
+      { "id": "d", "text": "A rounding convention applied to drug prices over $100", "is_correct": false }
+    ],
+    "explanation": "When AMP - URA ≤ $0.00, HRSA sets the ceiling price at $0.01 — one penny. This is called penny pricing.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "HRSA's response to manufacturer contract pharmacy restrictions beginning in 2020 included:",
+    "answers": [
+      { "id": "a", "text": "Approving manufacturer restrictions as legally valid exercises of pricing discretion", "is_correct": false },
+      { "id": "b", "text": "Issuing advisory opinions stating the restrictions violated the 340B statute and initiating the CMP process", "is_correct": true },
+      { "id": "c", "text": "Restricting covered entities to one contract pharmacy to reduce manufacturer concerns", "is_correct": false },
+      { "id": "d", "text": "Amending OPAIS to limit contract pharmacy registrations", "is_correct": false }
+    ],
+    "explanation": "HRSA issued advisory opinions asserting manufacturer restrictions violate the statute and initiated CMP proceedings against certain manufacturers.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "The 340B ADR process allows which parties to file complaints?",
+    "answers": [
+      { "id": "a", "text": "Covered entities only", "is_correct": false },
+      { "id": "b", "text": "Manufacturers only", "is_correct": false },
+      { "id": "c", "text": "Both covered entities (for overcharges) and manufacturers (for diversion/duplicate discounts)", "is_correct": true },
+      { "id": "d", "text": "State Medicaid agencies only", "is_correct": false }
+    ],
+    "explanation": "The ADR regulation allows both covered entities to file for overcharges and manufacturers to file for alleged diversion or duplicate discounts.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "What is the Unit Rebate Amount (URA) as used in the 340B ceiling price formula?",
+    "answers": [
+      { "id": "a", "text": "The manufacturer's best price for the drug", "is_correct": false },
+      { "id": "b", "text": "The per-unit Medicaid rebate amount, calculated under the MDRP formula", "is_correct": true },
+      { "id": "c", "text": "The wholesaler's discount to covered entities", "is_correct": false },
+      { "id": "d", "text": "The average retail pharmacy markup", "is_correct": false }
+    ],
+    "explanation": "The URA is the per-unit Medicaid rebate amount computed under the Medicaid Drug Rebate Program. The 340B ceiling price = AMP - URA.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "Under the 2010 HRSA contract pharmacy guidance, a covered entity using a contract pharmacy must:",
+    "answers": [
+      { "id": "a", "text": "Have a written contract including patient confidentiality, audit rights, and compliance obligations", "is_correct": true },
+      { "id": "b", "text": "Employ the pharmacists at the contract pharmacy directly", "is_correct": false },
+      { "id": "c", "text": "Submit the contract to HRSA for pre-approval", "is_correct": false },
+      { "id": "d", "text": "Limit the contract to a single drug class", "is_correct": false }
+    ],
+    "explanation": "HRSA's 2010 guidance requires a written agreement with each contract pharmacy including audit rights, patient confidentiality, and compliance provisions.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "In the replenishment model at a contract pharmacy, what happens after a TPA confirms a patient is 340B-eligible?",
+    "answers": [
+      { "id": "a", "text": "The TPA purchases the drug directly from the manufacturer at 340B price", "is_correct": false },
+      { "id": "b", "text": "The covered entity orders a 340B-priced equivalent unit from its wholesaler to replenish the pharmacy's non-340B inventory", "is_correct": true },
+      { "id": "c", "text": "The pharmacy retroactively reorders the drug from a 340B wholesaler", "is_correct": false },
+      { "id": "d", "text": "The covered entity sends a check to the pharmacy for the retail-340B price difference", "is_correct": false }
+    ],
+    "explanation": "In the replenishment model, after eligibility is confirmed, the covered entity purchases 340B-priced units to replenish what the pharmacy dispensed from its own inventory.",
+    "difficulty_tag": "scenario"
+  },
+  {
+    "question_text": "An ADR panel's decision under 42 C.F.R. Part 10 is:",
+    "answers": [
+      { "id": "a", "text": "Immediately binding and enforceable in federal court", "is_correct": false },
+      { "id": "b", "text": "A recommendation to the HRSA Administrator, who issues the final agency decision", "is_correct": true },
+      { "id": "c", "text": "Binding only if both parties consent in writing", "is_correct": false },
+      { "id": "d", "text": "Subject to mandatory arbitration before a federal administrative law judge", "is_correct": false }
+    ],
+    "explanation": "The ADR panel makes a recommendation. The HRSA Administrator reviews it and issues a final agency decision, which is then subject to judicial review under the APA.",
+    "difficulty_tag": "applied"
+  },
+  {
+    "question_text": "HRSA has stated that manufacturers cannot condition 340B pricing on what type of demand?",
+    "answers": [
+      { "id": "a", "text": "Requiring covered entities to purchase a minimum volume of drugs", "is_correct": false },
+      { "id": "b", "text": "Disclosure of patient-level prescription data as a precondition for 340B pricing", "is_correct": true },
+      { "id": "c", "text": "Using a specific TPA approved by the manufacturer", "is_correct": false },
+      { "id": "d", "text": "Purchasing only through Prime Vendor-contracted wholesalers", "is_correct": false }
+    ],
+    "explanation": "HRSA has issued guidance stating manufacturers cannot condition 340B pricing on disclosure of patient-level data. Covered entities should report such demands to HRSA.",
+    "difficulty_tag": "scenario"
+  },
+  {
+    "question_text": "For the 340B ceiling price formula, AMP is reported to CMS by:",
+    "answers": [
+      { "id": "a", "text": "Covered entities based on actual acquisition cost", "is_correct": false },
+      { "id": "b", "text": "Pharmaceutical manufacturers under the MDRP", "is_correct": true },
+      { "id": "c", "text": "HRSA based on wholesale transaction data", "is_correct": false },
+      { "id": "d", "text": "The Prime Vendor Program based on contract pricing", "is_correct": false }
+    ],
+    "explanation": "AMP is reported quarterly by pharmaceutical manufacturers to CMS as part of their MDRP obligations.",
+    "difficulty_tag": "basic"
+  },
+  {
+    "question_text": "A covered entity discovers its TPA incorrectly flagged 200 prescriptions as 340B-eligible when the patients did not meet the patient definition. The best practice response is to:",
+    "answers": [
+      { "id": "a", "text": "Terminate the TPA immediately and report to HRSA before investigating", "is_correct": false },
+      { "id": "b", "text": "Document the findings, quantify the 340B discount received on invalid transactions, correct the TPA configuration, and consider voluntary repayment to manufacturers", "is_correct": true },
+      { "id": "c", "text": "Accept the error as a TPA liability and take no further action", "is_correct": false },
+      { "id": "d", "text": "Wait to see if HRSA identifies the issue in an audit before acting", "is_correct": false }
+    ],
+    "explanation": "Proactive documentation, root cause correction, and voluntary repayment is the recognized best practice for self-identified compliance failures.",
+    "difficulty_tag": "scenario"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "slug": "module-1",
+  "order_index": 1,
+  "title": "Foundations of the 340B Program",
+  "description": "Establish a solid understanding of the 340B program's origin, purpose, eligible entities, and administrative framework. This module covers the statutory basis, HRSA's oversight role, and how OPAIS works.",
+  "difficulty": "easy",
+  "is_free": true,
+  "quiz_pass_threshold": 0.80
+}

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import type { SubscriptionRecord } from '@/types/stripe'
-import { hasActiveAccess, trialDaysRemaining } from '@/types/stripe'
+import { hasActiveAccess, trialDaysRemaining, hasComplianceAccess } from '@/types/stripe'
 
 const DIFFICULTY_COLORS: Record<string, string> = {
   easy: 'bg-green-100 text-green-700',
@@ -42,6 +42,7 @@ export default async function DashboardPage() {
   const sub = subscription as SubscriptionRecord | null
   const hasAccess = hasActiveAccess(sub)
   const daysLeft = trialDaysRemaining(sub)
+  const hasCompliance = hasComplianceAccess(sub)
 
   const progressMap = new Map(
     (progressRows ?? []).map((p) => [p.module_id, p])
@@ -113,6 +114,35 @@ export default async function DashboardPage() {
           </Link>
         </div>
       )}
+
+      {/* Compliance Monitor teaser / CTA */}
+      <div className={`rounded-xl p-5 border flex items-center justify-between gap-4 ${
+        hasCompliance
+          ? 'bg-brand-cyan border-brand-cyan-dark'
+          : 'bg-white border-slate-200'
+      }`}>
+        <div>
+          <p className="font-semibold text-brand-navy text-sm">
+            <span className="text-brand-teal mr-1">⚕</span>
+            {hasCompliance ? 'Compliance Monitor' : 'New: 340B Compliance Monitor'}
+          </p>
+          <p className="text-xs text-slate-600 mt-0.5">
+            {hasCompliance
+              ? 'Track daily Federal Register updates and HRSA regulatory changes.'
+              : 'Track regulatory changes automatically. Daily Federal Register scanning + AI summaries.'}
+          </p>
+        </div>
+        <Link
+          href={hasCompliance ? '/compliance' : '/compliance-upgrade'}
+          className={`text-xs font-medium px-3 py-1.5 rounded-lg shrink-0 transition-colors ${
+            hasCompliance
+              ? 'bg-brand-navy text-white hover:bg-brand-navy-dark'
+              : 'bg-brand-teal text-white hover:bg-brand-teal-dark'
+          }`}
+        >
+          {hasCompliance ? 'Open →' : 'Learn more →'}
+        </Link>
+      </div>
 
       {/* Continue learning */}
       {currentModule && (

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import type { SubscriptionRecord } from '@/types/stripe'
-import { trialDaysRemaining, hasActiveAccess } from '@/types/stripe'
+import { trialDaysRemaining, hasActiveAccess, hasComplianceAccess } from '@/types/stripe'
 import { NavLink } from '@/components/NavLink'
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
@@ -23,6 +23,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const sub = subscription as SubscriptionRecord | null
   const daysLeft = trialDaysRemaining(sub)
   const hasAccess = hasActiveAccess(sub)
+  const hasCompliance = hasComplianceAccess(sub)
 
   return (
     <div className="min-h-screen bg-brand-pale">
@@ -53,6 +54,10 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             <nav className="hidden sm:flex items-center gap-1">
               <NavLink href="/dashboard">Dashboard</NavLink>
               <NavLink href="/modules">Modules</NavLink>
+              {hasCompliance
+                ? <NavLink href="/compliance"><span className="text-brand-teal mr-1">⚕</span>Compliance</NavLink>
+                : <Link href="/compliance-upgrade" className="text-sm font-medium px-3 py-1.5 rounded-lg text-brand-teal hover:bg-brand-cyan transition-colors border border-brand-teal/30">⚕ Compliance</Link>
+              }
             </nav>
           </div>
 

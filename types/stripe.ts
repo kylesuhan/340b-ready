@@ -37,6 +37,19 @@ export function hasActiveAccess(sub: SubscriptionRecord | null | undefined): boo
   return true
 }
 
+export function hasComplianceAccess(sub: SubscriptionRecord | null | undefined): boolean {
+  if (!sub) return false
+  if (!['trialing', 'active'].includes(sub.status)) return false
+  if (sub.status === 'trialing' && sub.trial_end) {
+    if (new Date(sub.trial_end) <= new Date()) return false
+  }
+  if (sub.status === 'active' && sub.current_period_end) {
+    if (new Date(sub.current_period_end) <= new Date()) return false
+  }
+  const compliancePriceId = process.env.NEXT_PUBLIC_COMPLIANCE_PRICE_ID
+  return !!compliancePriceId && sub.stripe_price_id === compliancePriceId
+}
+
 export function trialDaysRemaining(sub: SubscriptionRecord | null | undefined): number | null {
   if (!sub || sub.status !== 'trialing' || !sub.trial_end) return null
   const diff = new Date(sub.trial_end).getTime() - Date.now()

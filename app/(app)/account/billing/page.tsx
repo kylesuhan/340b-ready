@@ -7,7 +7,7 @@ import { formatDate } from '@/lib/utils'
 import { PortalButton } from '@/components/PortalButton'
 
 const STATUS_LABELS: Record<string, { label: string; className: string }> = {
-  trialing: { label: 'Trial active', className: 'bg-blue-100 text-blue-700' },
+  trialing: { label: 'Trial active', className: 'bg-brand-pale text-brand-navy' },
   active: { label: 'Active', className: 'bg-green-100 text-green-700' },
   past_due: { label: 'Payment overdue', className: 'bg-red-100 text-red-700' },
   canceled: { label: 'Canceled', className: 'bg-slate-100 text-slate-500' },
@@ -85,7 +85,7 @@ export default async function BillingPage() {
           <p className="text-slate-600 text-sm">No active subscription.</p>
           <Link
             href="/upgrade"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors"
+            className="inline-block bg-brand-navy hover:bg-brand-navy-dark text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors"
           >
             Start free trial
           </Link>

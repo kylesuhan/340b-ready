@@ -88,7 +88,7 @@ export default async function ModuleDetailPage({
             </span>
           )}
         </div>
-        <h1 className="text-2xl font-bold text-slate-900 mb-2">{module.title}</h1>
+        <h1 className="text-2xl font-bold text-slate-900 mb-2"><span className="text-brand-teal mr-2">⚕</span>{module.title}</h1>
         <p className="text-slate-600 text-sm leading-relaxed">{module.description}</p>
       </div>
 
@@ -122,7 +122,7 @@ export default async function ModuleDetailPage({
                 <Link
                   key={lesson.id}
                   href={`/modules/${moduleId}/lessons/${lesson.id}`}
-                  className="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-4 py-3 hover:border-blue-300 hover:shadow-sm transition-all"
+                  className="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-4 py-3 hover:border-brand-teal hover:shadow-sm transition-all"
                 >
                   <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
                     done ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'
@@ -166,7 +166,7 @@ export default async function ModuleDetailPage({
               </Link>
             </div>
           ) : lessonsCompleted.length < Math.min(1, totalLessons) ? (
-            <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+            <div className="bg-brand-pale border border-slate-200 rounded-xl p-4">
               <p className="text-slate-600 text-sm">
                 Start with the lessons above to prepare for the quiz.
               </p>
@@ -174,7 +174,7 @@ export default async function ModuleDetailPage({
           ) : (
             <Link
               href={`/quiz/${moduleId}`}
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors"
+              className="inline-block bg-brand-navy hover:bg-brand-navy-dark text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors"
             >
               Take module quiz →
             </Link>

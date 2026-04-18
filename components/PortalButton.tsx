@@ -33,7 +33,7 @@ export function PortalButton() {
       <button
         onClick={handlePortal}
         disabled={loading}
-        className="text-sm border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
+        className="text-sm border border-slate-300 text-slate-700 hover:bg-brand-pale font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
       >
         {loading ? 'Opening portal…' : 'Manage subscription →'}
       </button>

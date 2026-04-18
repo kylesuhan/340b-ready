@@ -91,7 +91,7 @@ export default async function LessonPage({
             </span>
           )}
         </div>
-        <h1 className="text-2xl font-bold text-slate-900">{lesson.title}</h1>
+        <h1 className="text-2xl font-bold text-slate-900"><span className="text-brand-teal mr-2">⚕</span>{lesson.title}</h1>
       </div>
 
       {/* Lesson content */}
@@ -111,7 +111,7 @@ export default async function LessonPage({
           {prevLesson && (
             <Link
               href={`/modules/${moduleId}/lessons/${prevLesson.id}`}
-              className="text-sm text-slate-600 border border-slate-200 px-4 py-2 rounded-lg hover:bg-slate-50 transition-colors"
+              className="text-sm text-slate-600 border border-slate-200 px-4 py-2 rounded-lg hover:bg-brand-pale transition-colors"
             >
               ← Previous
             </Link>
@@ -128,14 +128,14 @@ export default async function LessonPage({
           {nextLesson ? (
             <Link
               href={`/modules/${moduleId}/lessons/${nextLesson.id}`}
-              className="text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors"
+              className="text-sm bg-brand-navy hover:bg-brand-navy-dark text-white font-medium px-4 py-2 rounded-lg transition-colors"
             >
               Next →
             </Link>
           ) : (
             <Link
               href={`/modules/${moduleId}`}
-              className="text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors"
+              className="text-sm bg-brand-navy hover:bg-brand-navy-dark text-white font-medium px-4 py-2 rounded-lg transition-colors"
             >
               {progress?.quiz_passed ? 'Back to module' : 'Take module quiz →'}
             </Link>

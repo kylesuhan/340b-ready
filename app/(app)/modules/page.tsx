@@ -43,7 +43,7 @@ export default async function ModulesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Modules</h1>
+        <h1 className="text-2xl font-bold text-slate-900"><span className="text-brand-teal mr-2">⚕</span>Modules</h1>
         <p className="text-slate-500 text-sm mt-1">
           Five progressive modules from foundational to exam-ready. Complete each quiz to unlock the next.
         </p>
@@ -72,7 +72,7 @@ export default async function ModulesPage() {
               <div className="p-5">
                 <div className="flex items-start gap-4">
                   <div className={`w-11 h-11 rounded-xl flex items-center justify-center text-base font-bold shrink-0 ${
-                    quizPassed ? 'bg-green-100 text-green-700' : isLocked ? 'bg-slate-100 text-slate-400' : 'bg-blue-600 text-white'
+                    quizPassed ? 'bg-green-100 text-green-700' : isLocked ? 'bg-slate-100 text-slate-400' : 'bg-brand-navy text-white'
                   }`}>
                     {quizPassed ? '✓' : isLocked ? '🔒' : m.order_index}
                   </div>
@@ -102,7 +102,7 @@ export default async function ModulesPage() {
                     )}
 
                     {lessonsCompleted > 0 && !quizPassed && !isLocked && (
-                      <p className="mt-2 text-xs text-blue-600 font-medium">
+                      <p className="mt-2 text-xs text-brand-teal font-medium">
                         {lessonsCompleted} lesson{lessonsCompleted !== 1 ? 's' : ''} completed
                       </p>
                     )}
@@ -110,7 +110,7 @@ export default async function ModulesPage() {
                 </div>
               </div>
 
-              <div className="border-t border-slate-100 px-5 py-3 bg-slate-50 flex items-center justify-between">
+              <div className="border-t border-slate-100 px-5 py-3 bg-brand-pale flex items-center justify-between">
                 {isLocked ? (
                   <Link
                     href={subscriptionLocked ? '/upgrade' : '/modules'}
@@ -121,7 +121,7 @@ export default async function ModulesPage() {
                 ) : (
                   <Link
                     href={`/modules/${m.id}`}
-                    className="text-sm font-medium text-blue-600 hover:text-blue-700"
+                    className="text-sm font-medium text-brand-teal hover:text-brand-teal-dark"
                   >
                     {quizPassed ? 'Review module →' : lessonsCompleted > 0 ? 'Continue →' : 'Start module →'}
                   </Link>

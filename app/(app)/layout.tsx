@@ -25,7 +25,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const hasAccess = hasActiveAccess(sub)
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-brand-pale">
       {/* Disclaimer banner */}
       <div className="bg-brand-cyan border-b border-brand-cyan-dark px-4 py-2 text-center">
         <p className="text-xs text-brand-navy">

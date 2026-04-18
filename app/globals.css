@@ -8,6 +8,8 @@
   --color-brand-green: #62bc60;
   --color-brand-cyan: #dff2f5;
   --color-brand-cyan-dark: #b8e4ec;
+  --color-brand-pale: #f0f7ff;
+  --color-brand-pale-dark: #e1efff;
 }
 
 :root {

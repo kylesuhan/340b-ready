@@ -35,7 +35,7 @@ export function CheckoutButton() {
       <button
         onClick={handleCheckout}
         disabled={loading}
-        className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-3 px-6 rounded-xl text-sm transition-colors"
+        className="w-full bg-brand-navy hover:bg-brand-navy-dark disabled:opacity-60 text-white font-semibold py-3 px-6 rounded-xl text-sm transition-colors"
       >
         {loading ? 'Redirecting to checkout…' : 'Start free trial'}
       </button>

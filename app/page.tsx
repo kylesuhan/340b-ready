@@ -83,7 +83,7 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
         <div className="inline-block bg-brand-cyan text-brand-navy text-xs font-semibold px-3 py-1 rounded-full mb-6 border border-brand-cyan-dark">
-          340B Drug Pricing Program — Certification Prep
+          ⚕ 340B Drug Pricing Program — Certification Prep
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight mb-5">
           Study smarter for your
@@ -116,7 +116,7 @@ export default async function HomePage() {
       {/* How it works */}
       <section className="max-w-5xl mx-auto px-6 py-12 border-t border-slate-100">
         <h2 className="text-xl font-semibold text-slate-900 mb-8 text-center">
-          A focused, progression-based approach
+          <span className="text-brand-teal mr-2">⚕</span>A focused, progression-based approach
         </h2>
         <div className="grid sm:grid-cols-3 gap-6">
           <div className="text-center p-5">
@@ -145,7 +145,7 @@ export default async function HomePage() {
           {MODULES_OVERVIEW.map((m) => (
             <div
               key={m.num}
-              className="flex items-start gap-4 p-4 rounded-xl border border-slate-100 bg-slate-50"
+              className="flex items-start gap-4 p-4 rounded-xl border border-slate-100 bg-brand-pale"
             >
               <div className="flex-shrink-0 w-8 h-8 bg-white border border-slate-200 rounded-lg flex items-center justify-center text-sm font-bold text-slate-700">
                 {m.num}
@@ -187,7 +187,7 @@ export default async function HomePage() {
       </section>
 
       {/* Footer / Disclaimer */}
-      <footer className="border-t border-slate-200 bg-slate-50 mt-8">
+      <footer className="border-t border-slate-200 bg-brand-pale mt-8">
         <div className="max-w-5xl mx-auto px-6 py-8">
           <div className="text-center">
             <p className="text-sm font-semibold text-slate-700 mb-2">340B Ready</p>

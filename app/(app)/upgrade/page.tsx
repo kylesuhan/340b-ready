@@ -28,13 +28,13 @@ export default async function UpgradePage() {
   return (
     <div className="max-w-lg mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Unlock 340B Ready</h1>
+        <h1 className="text-2xl font-bold text-slate-900"><span className="text-brand-teal mr-2">⚕</span>Unlock 340B Ready</h1>
         <p className="text-slate-500 text-sm mt-1">
           Start your free trial to access all five modules.
         </p>
       </div>
 
-      <div className="bg-white border-2 border-blue-200 rounded-xl p-7 space-y-5">
+      <div className="bg-white border-2 border-brand-pale-dark rounded-xl p-7 space-y-5">
         <div>
           <p className="text-3xl font-bold text-slate-900">
             $29<span className="text-lg font-normal text-slate-500">/month</span>

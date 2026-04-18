@@ -78,13 +78,13 @@ export default async function DashboardPage() {
         <h1 className="text-2xl font-bold text-slate-900">
           Welcome back{name ? `, ${name}` : ''}
         </h1>
-        <p className="text-slate-500 mt-1 text-sm">Your 340B certification prep dashboard.</p>
+        <p className="text-slate-500 mt-1 text-sm"><span className="text-brand-teal mr-1">⚕</span> Your 340B certification prep dashboard.</p>
       </div>
 
       {/* Subscription / trial notice */}
       {sub?.status === 'trialing' && daysLeft !== null && (
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 flex items-center justify-between gap-4">
-          <p className="text-sm text-blue-800">
+        <div className="bg-brand-pale border border-brand-pale-dark rounded-xl p-4 flex items-center justify-between gap-4">
+          <p className="text-sm text-brand-navy">
             <strong>Free trial active.</strong>{' '}
             {daysLeft === 0
               ? 'Your trial ends today.'
@@ -92,7 +92,7 @@ export default async function DashboardPage() {
           </p>
           <Link
             href="/account/billing"
-            className="text-xs font-medium text-blue-700 underline shrink-0"
+            className="text-xs font-medium text-brand-navy underline shrink-0"
           >
             Manage
           </Link>
@@ -117,13 +117,13 @@ export default async function DashboardPage() {
       {/* Continue learning */}
       {currentModule && (
         <div>
-          <h2 className="text-base font-semibold text-slate-900 mb-3">Continue learning</h2>
+          <h2 className="text-base font-semibold text-slate-900 mb-3"><span className="text-brand-teal mr-1.5">⚕</span>Continue learning</h2>
           <Link
             href={currentModule.isLocked ? '/upgrade' : `/modules/${currentModule.id}`}
-            className="block bg-white border border-slate-200 rounded-xl p-5 hover:border-blue-300 hover:shadow-sm transition-all"
+            className="block bg-white border border-slate-200 rounded-xl p-5 hover:border-brand-teal hover:shadow-sm transition-all"
           >
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center font-bold text-sm shrink-0">
+              <div className="w-10 h-10 bg-brand-navy text-white rounded-xl flex items-center justify-center font-bold text-sm shrink-0">
                 {currentModule.order_index}
               </div>
               <div className="flex-1">
@@ -135,7 +135,7 @@ export default async function DashboardPage() {
                 </div>
                 <p className="text-xs text-slate-500 line-clamp-2">{currentModule.description}</p>
                 {currentModule.lessonsCompleted > 0 && (
-                  <p className="text-xs text-blue-600 mt-2 font-medium">
+                  <p className="text-xs text-brand-teal mt-2 font-medium">
                     {currentModule.lessonsCompleted} lesson{currentModule.lessonsCompleted !== 1 ? 's' : ''} completed
                   </p>
                 )}
@@ -148,7 +148,7 @@ export default async function DashboardPage() {
 
       {/* All modules */}
       <div>
-        <h2 className="text-base font-semibold text-slate-900 mb-3">All modules</h2>
+        <h2 className="text-base font-semibold text-slate-900 mb-3"><span className="text-brand-teal mr-1.5">⚕</span>All modules</h2>
         <div className="space-y-2">
           {moduleStatuses.map((m, idx) => (
             <Link
@@ -157,7 +157,7 @@ export default async function DashboardPage() {
               className="flex items-center gap-4 bg-white border border-slate-200 rounded-xl px-4 py-3 hover:border-slate-300 transition-colors"
             >
               <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold shrink-0 ${
-                m.quizPassed ? 'bg-green-100 text-green-700' : m.isLocked ? 'bg-slate-100 text-slate-400' : 'bg-blue-50 text-blue-600'
+                m.quizPassed ? 'bg-green-100 text-green-700' : m.isLocked ? 'bg-slate-100 text-slate-400' : 'bg-brand-pale text-brand-teal'
               }`}>
                 {m.quizPassed ? '✓' : m.isLocked ? '🔒' : m.order_index}
               </div>

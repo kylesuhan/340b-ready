@@ -60,7 +60,7 @@ export default async function HomePage() {
       <header className="border-b border-slate-200 bg-white">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Image src="/logo.jpeg" alt="340B Ready Trainer" width={120} height={40} className="object-contain" />
+            <Image src="/logo.jpeg" alt="340B Ready Trainer" width={120} height={40} style={{ height: '38px', width: 'auto' }} className="object-contain" />
             <span className="text-xs text-slate-500 hidden sm:inline">Certification Prep</span>
           </div>
           <div className="flex items-center gap-3">

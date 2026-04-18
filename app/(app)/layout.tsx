@@ -48,7 +48,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-6">
             <Link href="/dashboard" className="shrink-0">
-              <Image src="/logo.jpeg" alt="340B Ready Trainer" width={110} height={36} className="object-contain" />
+              <Image src="/logo.jpeg" alt="340B Ready Trainer" width={110} height={36} style={{ height: '34px', width: 'auto' }} className="object-contain" />
             </Link>
             <nav className="hidden sm:flex items-center gap-1">
               <NavLink href="/dashboard">Dashboard</NavLink>

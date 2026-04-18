@@ -7,7 +7,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
-            <Image src="/logo.jpeg" alt="340B Ready Trainer" width={160} height={54} className="object-contain mx-auto" />
+            <Image src="/logo.jpeg" alt="340B Ready Trainer" width={160} height={54} style={{ height: '54px', width: 'auto' }} className="object-contain mx-auto" />
           </Link>
           <p className="text-sm text-brand-navy mt-2 font-medium">Certification Prep Companion</p>
         </div>

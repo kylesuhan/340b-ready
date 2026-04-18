@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import type { SubscriptionRecord } from '@/types/stripe'
 import { trialDaysRemaining, hasActiveAccess } from '@/types/stripe'
@@ -26,15 +27,15 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Disclaimer banner */}
-      <div className="bg-amber-50 border-b border-amber-200 px-4 py-2 text-center">
-        <p className="text-xs text-amber-800">
+      <div className="bg-brand-cyan border-b border-brand-cyan-dark px-4 py-2 text-center">
+        <p className="text-xs text-brand-navy">
           <strong>Study companion only.</strong> Not legal advice or official HRSA guidance.
           Verify against current{' '}
           <a
             href="https://www.hrsa.gov/opa/index.html"
             target="_blank"
             rel="noopener noreferrer"
-            className="underline"
+            className="underline hover:text-brand-teal"
           >
             HRSA source materials
           </a>
@@ -46,8 +47,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-6">
-            <Link href="/dashboard" className="text-base font-bold text-slate-900 shrink-0">
-              340B Ready
+            <Link href="/dashboard" className="shrink-0">
+              <Image src="/logo.jpeg" alt="340B Ready Trainer" width={110} height={36} className="object-contain" />
             </Link>
             <nav className="hidden sm:flex items-center gap-1">
               <NavLink href="/dashboard">Dashboard</NavLink>
@@ -59,7 +60,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             {daysLeft !== null && (
               <Link
                 href="/account/billing"
-                className="hidden sm:inline-block text-xs bg-blue-50 text-blue-700 border border-blue-200 px-2.5 py-1 rounded-full hover:bg-blue-100 transition-colors"
+                className="hidden sm:inline-block text-xs bg-brand-cyan text-brand-navy border border-brand-cyan-dark px-2.5 py-1 rounded-full hover:bg-brand-cyan-dark transition-colors"
               >
                 {daysLeft === 0 ? 'Trial ends today' : `${daysLeft}d trial left`}
               </Link>
@@ -67,25 +68,25 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             {!hasAccess && sub === null && (
               <Link
                 href="/upgrade"
-                className="text-xs bg-blue-600 text-white px-3 py-1.5 rounded-lg hover:bg-blue-700 font-medium transition-colors"
+                className="text-xs bg-brand-teal text-white px-3 py-1.5 rounded-lg hover:bg-brand-teal-dark font-medium transition-colors"
               >
                 Upgrade
               </Link>
             )}
             <div className="relative group">
-              <button className="text-sm text-slate-600 hover:text-slate-900 font-medium px-2 py-1 rounded-lg hover:bg-slate-100 transition-colors">
+              <button className="text-sm text-slate-600 hover:text-brand-navy font-medium px-2 py-1 rounded-lg hover:bg-brand-cyan transition-colors">
                 {user.email?.split('@')[0]}
               </button>
               <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg border border-slate-200 py-1 hidden group-hover:block z-20">
                 <Link
                   href="/account"
-                  className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                  className="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-cyan hover:text-brand-navy"
                 >
                   Account
                 </Link>
                 <Link
                   href="/account/billing"
-                  className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                  className="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-cyan hover:text-brand-navy"
                 >
                   Billing
                 </Link>
@@ -93,7 +94,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
                   <form action="/api/auth/signout" method="post">
                     <button
                       type="submit"
-                      className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                      className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-brand-cyan hover:text-brand-navy"
                     >
                       Sign out
                     </button>

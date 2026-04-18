@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-navy: #1c3d6b;
+  --color-brand-navy-dark: #152f52;
+  --color-brand-teal: #27b5c4;
+  --color-brand-teal-dark: #1f9aaa;
+  --color-brand-green: #62bc60;
+  --color-brand-cyan: #dff2f5;
+  --color-brand-cyan-dark: #b8e4ec;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #0f172a;
@@ -23,10 +33,10 @@ body {
 .lesson-prose strong { font-weight: 600; color: #0f172a; }
 .lesson-prose em { font-style: italic; }
 .lesson-prose code { background: #f1f5f9; padding: 0.1rem 0.35rem; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 0.875em; color: #0f172a; }
-.lesson-prose blockquote { border-left: 4px solid #93c5fd; background: #eff6ff; padding: 0.75rem 1rem; margin: 1rem 0; border-radius: 0 6px 6px 0; }
-.lesson-prose blockquote p { color: #1e40af; margin: 0; }
+.lesson-prose blockquote { border-left: 4px solid #27b5c4; background: #dff2f5; padding: 0.75rem 1rem; margin: 1rem 0; border-radius: 0 6px 6px 0; }
+.lesson-prose blockquote p { color: #1c3d6b; margin: 0; }
 .lesson-prose hr { border: none; border-top: 1px solid #e2e8f0; margin: 1.5rem 0; }
 .lesson-prose table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
-.lesson-prose th { background: #f8fafc; border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; text-align: left; font-weight: 600; color: #0f172a; }
+.lesson-prose th { background: #dff2f5; border: 1px solid #b8e4ec; padding: 0.5rem 0.75rem; text-align: left; font-weight: 600; color: #1c3d6b; }
 .lesson-prose td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; color: #334155; }
-.lesson-prose a { color: #2563eb; text-decoration: underline; }
+.lesson-prose a { color: #27b5c4; text-decoration: underline; }

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 
@@ -58,9 +59,9 @@ export default async function HomePage() {
       {/* Nav */}
       <header className="border-b border-slate-200 bg-white">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div>
-            <span className="text-lg font-bold text-slate-900">340B Ready</span>
-            <span className="ml-2 text-xs text-slate-500 hidden sm:inline">Certification Prep</span>
+          <div className="flex items-center gap-2">
+            <Image src="/logo.jpeg" alt="340B Ready Trainer" width={120} height={40} className="object-contain" />
+            <span className="text-xs text-slate-500 hidden sm:inline">Certification Prep</span>
           </div>
           <div className="flex items-center gap-3">
             <Link
@@ -71,7 +72,7 @@ export default async function HomePage() {
             </Link>
             <Link
               href="/signup"
-              className="text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-colors"
+              className="text-sm bg-brand-navy hover:bg-brand-navy-dark text-white font-medium px-4 py-2 rounded-lg transition-colors"
             >
               Get started
             </Link>
@@ -81,7 +82,7 @@ export default async function HomePage() {
 
       {/* Hero */}
       <section className="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
-        <div className="inline-block bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-6 border border-blue-200">
+        <div className="inline-block bg-brand-cyan text-brand-navy text-xs font-semibold px-3 py-1 rounded-full mb-6 border border-brand-cyan-dark">
           340B Drug Pricing Program — Certification Prep
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight mb-5">
@@ -96,13 +97,13 @@ export default async function HomePage() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
             href="/signup"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-7 py-3 rounded-lg transition-colors text-sm"
+            className="bg-brand-navy hover:bg-brand-navy-dark text-white font-semibold px-7 py-3 rounded-lg transition-colors text-sm"
           >
             Start free — 3-day trial
           </Link>
           <Link
             href="/login"
-            className="border border-slate-300 text-slate-700 hover:bg-slate-50 font-semibold px-7 py-3 rounded-lg transition-colors text-sm"
+            className="border border-brand-teal text-brand-navy hover:bg-brand-cyan font-semibold px-7 py-3 rounded-lg transition-colors text-sm"
           >
             Sign in
           </Link>
@@ -119,17 +120,17 @@ export default async function HomePage() {
         </h2>
         <div className="grid sm:grid-cols-3 gap-6">
           <div className="text-center p-5">
-            <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3 text-lg font-bold">1</div>
+            <div className="w-10 h-10 bg-brand-cyan text-brand-navy rounded-xl flex items-center justify-center mx-auto mb-3 text-lg font-bold">1</div>
             <h3 className="font-semibold text-slate-900 mb-1">Read each lesson</h3>
             <p className="text-sm text-slate-600">Concise, structured content aligned to real certification topics and HRSA standards.</p>
           </div>
           <div className="text-center p-5">
-            <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3 text-lg font-bold">2</div>
+            <div className="w-10 h-10 bg-brand-cyan text-brand-navy rounded-xl flex items-center justify-center mx-auto mb-3 text-lg font-bold">2</div>
             <h3 className="font-semibold text-slate-900 mb-1">Pass the module quiz</h3>
             <p className="text-sm text-slate-600">Each module ends with a quiz. Score 80%+ to unlock the next. Failed attempts regenerate with fresh questions.</p>
           </div>
           <div className="text-center p-5">
-            <div className="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3 text-lg font-bold">3</div>
+            <div className="w-10 h-10 bg-brand-cyan text-brand-navy rounded-xl flex items-center justify-center mx-auto mb-3 text-lg font-bold">3</div>
             <h3 className="font-semibold text-slate-900 mb-1">Progress to expert level</h3>
             <p className="text-sm text-slate-600">Five modules from foundational to exam-ready, ensuring real absorption — not just memorization.</p>
           </div>
@@ -179,7 +180,7 @@ export default async function HomePage() {
         </p>
         <Link
           href="/signup"
-          className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors text-sm"
+          className="inline-block bg-brand-navy hover:bg-brand-navy-dark text-white font-semibold px-8 py-3 rounded-lg transition-colors text-sm"
         >
           Create free account
         </Link>

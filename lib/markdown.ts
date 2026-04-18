@@ -1,7 +1,7 @@
 /**
  * Minimal markdown renderer for lesson content.
  * Handles the subset of markdown used in lesson files.
- * Server-side only.
+ * Server-side only. HTML entities are escaped before inline processing.
  */
 export function renderMarkdown(md: string): string {
   if (!md) return ''
@@ -96,10 +96,58 @@ export function renderMarkdown(md: string): string {
   return output.join('\n')
 }
 
-function processInline(text: string): string {
+/** Escape HTML entities to prevent XSS from raw text content */
+function escapeHtml(text: string): string {
   return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/`(.*?)`/g, '<code>$1</code>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
+function processInline(text: string): string {
+  // Extract markdown tokens before escaping so we can restore them
+  // Pattern: process markdown syntax, then escape remaining text
+  const segments: Array<{ type: 'raw' | 'html'; value: string }> = []
+
+  // Split on markdown patterns while preserving them
+  const pattern = /(\*\*.*?\*\*|\*.*?\*|`.*?`|\[[^\]]+\]\([^)]+\))/g
+  let last = 0
+  let match: RegExpExecArray | null
+
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > last) {
+      segments.push({ type: 'raw', value: text.slice(last, match.index) })
+    }
+    const token = match[0]
+    if (token.startsWith('**') && token.endsWith('**')) {
+      segments.push({ type: 'html', value: `<strong>${escapeHtml(token.slice(2, -2))}</strong>` })
+    } else if (token.startsWith('*') && token.endsWith('*')) {
+      segments.push({ type: 'html', value: `<em>${escapeHtml(token.slice(1, -1))}</em>` })
+    } else if (token.startsWith('`') && token.endsWith('`')) {
+      segments.push({ type: 'html', value: `<code>${escapeHtml(token.slice(1, -1))}</code>` })
+    } else if (token.startsWith('[')) {
+      const linkMatch = token.match(/\[([^\]]+)\]\(([^)]+)\)/)
+      if (linkMatch) {
+        // Only allow http/https URLs in links
+        const href = linkMatch[2].startsWith('http://') || linkMatch[2].startsWith('https://')
+          ? linkMatch[2]
+          : '#'
+        segments.push({
+          type: 'html',
+          value: `<a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(linkMatch[1])}</a>`,
+        })
+      }
+    }
+    last = match.index + token.length
+  }
+
+  if (last < text.length) {
+    segments.push({ type: 'raw', value: text.slice(last) })
+  }
+
+  return segments
+    .map(s => s.type === 'raw' ? escapeHtml(s.value) : s.value)
+    .join('')
 }

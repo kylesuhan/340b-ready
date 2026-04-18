@@ -12,7 +12,9 @@ function LoginForm() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
-  const redirectTo = searchParams.get('redirectTo') ?? '/dashboard'
+  const rawRedirect = searchParams.get('redirectTo') ?? '/dashboard'
+  // Whitelist internal paths only — no open redirects
+  const redirectTo = rawRedirect.startsWith('/') && !rawRedirect.startsWith('//') ? rawRedirect : '/dashboard'
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault()

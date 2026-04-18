@@ -59,8 +59,8 @@ export default async function UpgradePage() {
 
         <CheckoutButton />
 
-        <p className="text-xs text-slate-400 text-center">
-          No charge for 3 days. Cancel anytime before trial ends.
+        <p className="text-xs text-slate-400 text-center leading-relaxed">
+          No charge for 3 days. After your trial, you will be billed <strong>$9.99/month</strong> automatically until you cancel. Cancel anytime from your billing settings.
         </p>
       </div>
 

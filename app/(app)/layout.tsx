@@ -113,10 +113,15 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white mt-12">
-        <div className="max-w-6xl mx-auto px-6 py-6">
-          <p className="text-xs text-slate-400 text-center">
+        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-slate-400 text-center sm:text-left">
             340B Ready is a study companion for educational purposes only. Not legal advice. Not official HRSA guidance.
           </p>
+          <div className="flex items-center gap-4 text-xs text-slate-400 shrink-0">
+            <Link href="/terms" className="hover:text-slate-600">Terms</Link>
+            <Link href="/privacy" className="hover:text-slate-600">Privacy</Link>
+            <span>© {new Date().getFullYear()} Soul Tribe AI, LLC</span>
+          </div>
         </div>
       </footer>
     </div>

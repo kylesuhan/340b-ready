@@ -190,7 +190,7 @@ export default async function HomePage() {
       <footer className="border-t border-slate-200 bg-brand-pale mt-8">
         <div className="max-w-5xl mx-auto px-6 py-8">
           <div className="text-center">
-            <p className="text-sm font-semibold text-slate-700 mb-2">340B Ready</p>
+            <p className="text-sm font-semibold text-slate-700 mb-2">340B Ready — by Soul Tribe AI, LLC</p>
             <p className="text-xs text-slate-500 max-w-2xl mx-auto leading-relaxed">
               <strong>Disclaimer:</strong> 340B Ready is a certification prep study companion for educational purposes only.
               It is not legal advice, official HRSA guidance, or a substitute for formal training or professional counsel.
@@ -205,6 +205,11 @@ export default async function HomePage() {
               </a>{' '}
               and qualified compliance professionals.
             </p>
+            <div className="flex items-center justify-center gap-4 mt-4 text-xs text-slate-400">
+              <Link href="/terms" className="hover:text-slate-600 underline">Terms of Service</Link>
+              <Link href="/privacy" className="hover:text-slate-600 underline">Privacy Policy</Link>
+              <span>© {new Date().getFullYear()} Soul Tribe AI, LLC</span>
+            </div>
           </div>
         </div>
       </footer>

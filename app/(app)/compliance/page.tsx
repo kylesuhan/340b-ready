@@ -3,6 +3,11 @@
 import { useState, useCallback, useEffect } from 'react'
 import Link from 'next/link'
 
+interface ResourceLink {
+  label: string
+  url: string
+}
+
 interface ComplianceItem {
   id: string
   source_id: string
@@ -14,6 +19,7 @@ interface ComplianceItem {
   ai_summary: string | null
   urgency: 'informational' | 'action-required' | 'deadline'
   affected_entities: string[]
+  resources: ResourceLink[]
   publication_date: string | null
   effective_date: string | null
   detected_at: string
@@ -171,6 +177,26 @@ function ComplianceCard({
         <p className="text-xs text-amber-700 font-medium">
           Effective {formatDate(item.effective_date)}
         </p>
+      )}
+
+      {/* Resource links */}
+      {item.resources?.length > 0 && (
+        <div className="border-t border-slate-100 pt-3">
+          <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Resources</p>
+          <div className="flex flex-wrap gap-2">
+            {item.resources.map((r) => (
+              <a
+                key={r.url}
+                href={r.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-medium text-brand-teal bg-brand-pale border border-brand-pale-dark px-3 py-1.5 rounded-lg hover:bg-brand-cyan transition-colors"
+              >
+                {r.label} ↗
+              </a>
+            ))}
+          </div>
+        </div>
       )}
 
       {/* Action buttons */}

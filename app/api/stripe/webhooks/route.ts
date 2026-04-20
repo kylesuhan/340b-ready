@@ -134,9 +134,24 @@ async function upsertSubscription(
     .eq('stripe_customer_id', customerId)
     .single()
 
-  if (!existing?.user_id) {
-    console.warn(`No user found for Stripe customer ${customerId}`)
-    return
+  let userId = existing?.user_id
+
+  if (!userId) {
+    // Row wasn't pre-created — fall back to Stripe customer metadata
+    const customer = await stripe.customers.retrieve(customerId)
+    if (customer.deleted) {
+      console.warn(`Customer ${customerId} deleted, skipping`)
+      return
+    }
+    userId = (customer as Stripe.Customer).metadata?.supabase_user_id
+    if (!userId) {
+      console.warn(`No supabase_user_id metadata on customer ${customerId}`)
+      return
+    }
+    // Seed the row so future lookups work
+    await serviceClient
+      .from('subscriptions')
+      .upsert({ user_id: userId, stripe_customer_id: customerId }, { onConflict: 'user_id' })
   }
 
   const item = sub.items.data[0]
@@ -148,7 +163,7 @@ async function upsertSubscription(
     .from('subscriptions')
     .upsert(
       {
-        user_id: existing.user_id,
+        user_id: userId,
         stripe_customer_id: customerId,
         stripe_subscription_id: sub.id,
         stripe_price_id: item?.price?.id ?? null,

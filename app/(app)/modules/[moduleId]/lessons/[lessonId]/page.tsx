@@ -3,7 +3,7 @@ import { notFound, redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { canAccessModule } from '@/lib/access/gates'
 import { renderMarkdown } from '@/lib/markdown'
-import { MarkLessonComplete } from '@/components/MarkLessonComplete'
+import { NextLessonButton } from '@/components/NextLessonButton'
 
 export default async function LessonPage({
   params,
@@ -119,26 +119,38 @@ export default async function LessonPage({
         </div>
 
         <div className="flex items-center gap-3">
-          {!isCompleted && (
-            <MarkLessonComplete
-              lessonId={lessonId}
-              moduleId={moduleId}
-            />
-          )}
           {nextLesson ? (
-            <Link
-              href={`/modules/${moduleId}/lessons/${nextLesson.id}`}
-              className="text-sm bg-brand-navy hover:bg-brand-navy-dark text-white font-medium px-4 py-2 rounded-lg transition-colors"
-            >
-              Next →
-            </Link>
+            isCompleted ? (
+              <Link
+                href={`/modules/${moduleId}/lessons/${nextLesson.id}`}
+                className="text-sm bg-brand-navy hover:bg-brand-navy-dark text-white font-medium px-4 py-2 rounded-lg transition-colors"
+              >
+                Next →
+              </Link>
+            ) : (
+              <NextLessonButton
+                lessonId={lessonId}
+                moduleId={moduleId}
+                nextHref={`/modules/${moduleId}/lessons/${nextLesson.id}`}
+                label="Next →"
+              />
+            )
           ) : (
-            <Link
-              href={`/modules/${moduleId}`}
-              className="text-sm bg-brand-navy hover:bg-brand-navy-dark text-white font-medium px-4 py-2 rounded-lg transition-colors"
-            >
-              {progress?.quiz_passed ? 'Back to module' : 'Take module quiz →'}
-            </Link>
+            isCompleted ? (
+              <Link
+                href={`/modules/${moduleId}`}
+                className="text-sm bg-brand-navy hover:bg-brand-navy-dark text-white font-medium px-4 py-2 rounded-lg transition-colors"
+              >
+                {progress?.quiz_passed ? 'Back to module' : 'Take module quiz →'}
+              </Link>
+            ) : (
+              <NextLessonButton
+                lessonId={lessonId}
+                moduleId={moduleId}
+                nextHref={`/modules/${moduleId}`}
+                label={progress?.quiz_passed ? 'Back to module' : 'Take module quiz →'}
+              />
+            )
           )}
         </div>
       </div>

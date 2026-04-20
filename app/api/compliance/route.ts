@@ -62,5 +62,5 @@ export async function GET(req: NextRequest) {
     review: reviewMap.get(item.id) ?? null,
   }))
 
-  return NextResponse.json({ items: enriched, total: enriched.length })
+  return NextResponse.json(enriched)
 }

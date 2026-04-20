@@ -37,7 +37,7 @@ export function CheckoutButton() {
         disabled={loading}
         className="w-full bg-brand-navy hover:bg-brand-navy-dark disabled:opacity-60 text-white font-semibold py-3 px-6 rounded-xl text-sm transition-colors"
       >
-        {loading ? 'Redirecting to checkout…' : 'Start free trial'}
+        {loading ? 'Redirecting to checkout…' : 'Start subscription'}
       </button>
     </div>
   )

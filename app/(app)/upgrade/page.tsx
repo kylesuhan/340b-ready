@@ -37,7 +37,7 @@ export default async function UpgradePage() {
       <div className="bg-white border-2 border-brand-pale-dark rounded-xl p-7 space-y-5">
         <div>
           <p className="text-3xl font-bold text-slate-900">
-            $29<span className="text-lg font-normal text-slate-500">/month</span>
+            $9.99<span className="text-lg font-normal text-slate-500">/month</span>
           </p>
           <p className="text-sm text-green-600 font-medium mt-0.5">3-day free trial included</p>
         </div>

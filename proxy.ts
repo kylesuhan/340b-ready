@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 
-const PROTECTED_PREFIXES = ['/dashboard', '/modules', '/quiz', '/account', '/upgrade']
+const PROTECTED_PREFIXES = ['/dashboard', '/modules', '/quiz', '/account', '/upgrade', '/compliance']
 const ADMIN_PREFIX = '/admin'
 const AUTH_PATHS = ['/login', '/signup', '/forgot-password']
 

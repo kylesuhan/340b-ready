@@ -23,6 +23,23 @@ export async function POST(req: NextRequest) {
 
   try {
     switch (event.type) {
+      case 'checkout.session.completed': {
+        const session = event.data.object as Stripe.Checkout.Session
+        // Immediately sync subscription when checkout completes — avoids timing gap
+        // before customer.subscription.created fires
+        const subscriptionId = session.subscription
+        if (subscriptionId) {
+          const sub = await stripe.subscriptions.retrieve(subscriptionId as string)
+          // Ensure the subscriptions row has the user_id linked before upserting
+          const customerId = typeof session.customer === 'string' ? session.customer : session.customer?.id
+          if (customerId) {
+            await ensureCustomerLinked(serviceClient, customerId, session.client_reference_id)
+          }
+          await upsertSubscription(serviceClient, sub)
+        }
+        break
+      }
+
       case 'customer.subscription.created':
       case 'customer.subscription.updated': {
         const sub = event.data.object as Stripe.Subscription
@@ -76,6 +93,30 @@ export async function POST(req: NextRequest) {
   }
 
   return NextResponse.json({ received: true })
+}
+
+// Links a Stripe customer ID to a user if the row doesn't exist yet.
+// client_reference_id is the Supabase user_id we pass into the Checkout session.
+async function ensureCustomerLinked(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  serviceClient: any,
+  customerId: string,
+  userId: string | null | undefined
+) {
+  if (!userId) return
+
+  const { data: existing } = await serviceClient
+    .from('subscriptions')
+    .select('user_id')
+    .eq('stripe_customer_id', customerId)
+    .single()
+
+  if (!existing?.user_id) {
+    // Create the row so upsertSubscription can find it
+    await serviceClient
+      .from('subscriptions')
+      .upsert({ user_id: userId, stripe_customer_id: customerId }, { onConflict: 'user_id' })
+  }
 }
 
 async function upsertSubscription(

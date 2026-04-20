@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/server'
 import type { SubscriptionRecord } from '@/types/stripe'
 import { trialDaysRemaining, hasActiveAccess, hasComplianceAccess } from '@/types/stripe'
 import { NavLink } from '@/components/NavLink'
+import { MobileNav } from '@/components/MobileNav'
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -24,6 +25,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   const daysLeft = trialDaysRemaining(sub)
   const hasAccess = hasActiveAccess(sub)
   const hasCompliance = hasComplianceAccess(sub)
+  const userLabel = user.email ?? ''
 
   return (
     <div className="min-h-screen bg-brand-pale">
@@ -45,7 +47,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       </div>
 
       {/* Top nav */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-10 relative">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-6">
             <Link href="/dashboard" className="shrink-0">
@@ -73,12 +75,13 @@ export default async function AppLayout({ children }: { children: React.ReactNod
             {!hasAccess && sub === null && (
               <Link
                 href="/upgrade"
-                className="text-xs bg-brand-teal text-white px-3 py-1.5 rounded-lg hover:bg-brand-teal-dark font-medium transition-colors"
+                className="hidden sm:inline-block text-xs bg-brand-teal text-white px-3 py-1.5 rounded-lg hover:bg-brand-teal-dark font-medium transition-colors"
               >
                 Upgrade
               </Link>
             )}
-            <div className="relative group">
+            {/* Desktop user dropdown */}
+            <div className="relative group hidden sm:block">
               <button className="text-sm text-slate-600 hover:text-brand-navy font-medium px-2 py-1 rounded-lg hover:bg-brand-cyan transition-colors">
                 {user.email?.split('@')[0]}
               </button>
@@ -107,6 +110,13 @@ export default async function AppLayout({ children }: { children: React.ReactNod
                 </div>
               </div>
             </div>
+
+            {/* Mobile hamburger menu */}
+            <MobileNav
+              hasCompliance={hasCompliance}
+              hasAccess={hasAccess}
+              userLabel={userLabel}
+            />
           </div>
         </div>
       </header>

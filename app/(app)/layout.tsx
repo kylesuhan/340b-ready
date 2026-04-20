@@ -6,6 +6,7 @@ import type { SubscriptionRecord } from '@/types/stripe'
 import { trialDaysRemaining, hasActiveAccess, hasComplianceAccess } from '@/types/stripe'
 import { NavLink } from '@/components/NavLink'
 import { MobileNav } from '@/components/MobileNav'
+import { UserDropdown } from '@/components/UserDropdown'
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -81,35 +82,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
               </Link>
             )}
             {/* Desktop user dropdown */}
-            <div className="relative group hidden sm:block">
-              <button className="text-sm text-slate-600 hover:text-brand-navy font-medium px-2 py-1 rounded-lg hover:bg-brand-cyan transition-colors">
-                {user.email?.split('@')[0]}
-              </button>
-              <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-lg shadow-lg border border-slate-200 py-1 hidden group-hover:block z-20">
-                <Link
-                  href="/account"
-                  className="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-cyan hover:text-brand-navy"
-                >
-                  Account
-                </Link>
-                <Link
-                  href="/account/billing"
-                  className="block px-4 py-2 text-sm text-slate-700 hover:bg-brand-cyan hover:text-brand-navy"
-                >
-                  Billing
-                </Link>
-                <div className="border-t border-slate-100 mt-1 pt-1">
-                  <form action="/api/auth/signout" method="post">
-                    <button
-                      type="submit"
-                      className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-brand-cyan hover:text-brand-navy"
-                    >
-                      Sign out
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
+            <UserDropdown label={user.email?.split('@')[0] ?? 'Account'} />
 
             {/* Mobile hamburger menu */}
             <MobileNav

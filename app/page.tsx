@@ -7,7 +7,7 @@ const MODULES_OVERVIEW = [
   {
     num: 1,
     title: 'Foundations',
-    difficulty: 'Easy',
+    difficulty: 'Basic',
     desc: 'Program origins, covered entities, HRSA oversight, OPAIS basics.',
     color: 'bg-green-100 text-green-800',
     free: true,
@@ -166,6 +166,62 @@ export default async function HomePage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Always current */}
+      <section className="max-w-5xl mx-auto px-6 py-12 border-t border-slate-100">
+        <div className="bg-brand-pale border border-brand-cyan-dark rounded-2xl p-8 sm:p-10">
+          <div className="max-w-3xl mx-auto">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-brand-teal text-xl">⚕</span>
+              <h2 className="text-xl font-semibold text-slate-900">Content that keeps up with the regulations</h2>
+            </div>
+            <p className="text-slate-600 text-sm leading-relaxed mb-8">
+              The 340B program evolves constantly — HRSA guidance changes, court decisions reshape
+              contract pharmacy rules, and new ADR processes come into effect. 340B Ready is built
+              to stay current so your preparation reflects the real exam environment.
+            </p>
+            <div className="grid sm:grid-cols-3 gap-6">
+              <div className="bg-white rounded-xl p-5 border border-slate-100">
+                <div className="text-2xl mb-3">📡</div>
+                <h3 className="font-semibold text-slate-900 text-sm mb-1">Daily Federal Register scanning</h3>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  Our automated scanner checks the Federal Register every day for new 340B-related rules,
+                  notices, and proposed guidance — so nothing slips through.
+                </p>
+              </div>
+              <div className="bg-white rounded-xl p-5 border border-slate-100">
+                <div className="text-2xl mb-3">🤖</div>
+                <h3 className="font-semibold text-slate-900 text-sm mb-1">AI-powered plain-English summaries</h3>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  Every regulatory update is summarized by Claude AI into clear, actionable language —
+                  no law degree required to understand what changed and why it matters.
+                </p>
+              </div>
+              <div className="bg-white rounded-xl p-5 border border-slate-100">
+                <div className="text-2xl mb-3">✏️</div>
+                <h3 className="font-semibold text-slate-900 text-sm mb-1">Lessons and quizzes kept in sync</h3>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  When regulations change, lesson content and quiz questions are reviewed and updated
+                  by our team — so you are always studying the most current version of the rules.
+                </p>
+              </div>
+            </div>
+            <div className="mt-6 pt-6 border-t border-brand-cyan-dark flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <p className="text-xs text-slate-500 leading-relaxed max-w-lg">
+                <strong className="text-slate-700">Compliance Pro subscribers</strong> also get direct access to the
+                Compliance Monitor dashboard — real-time regulatory alerts with urgency ratings,
+                affected entity tags, and direct links to source documents.
+              </p>
+              <Link
+                href="/signup"
+                className="shrink-0 text-xs bg-brand-navy hover:bg-brand-navy-dark text-white font-semibold px-4 py-2 rounded-lg transition-colors"
+              >
+                Get started →
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

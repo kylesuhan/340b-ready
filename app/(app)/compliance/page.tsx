@@ -470,7 +470,23 @@ export default function CompliancePage() {
             <span className="text-brand-teal mr-2">⚕</span>Compliance Monitor
           </h1>
           <p className="text-slate-500 mt-1 text-sm">
-            Track 340B regulatory changes from the Federal Register and HRSA.
+            Automatically tracks 340B regulatory changes daily from three sources:
+          </p>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {[
+              { icon: '📋', label: 'Federal Register', desc: 'Rules, proposed rules & notices' },
+              { icon: '🏛', label: 'HRSA OPA', desc: 'Program updates & integrity notices' },
+              { icon: '🔍', label: 'OIG Work Plan', desc: 'Audit targets & compliance reports' },
+            ].map((s) => (
+              <span key={s.label} className="inline-flex items-center gap-1.5 text-xs bg-white border border-slate-200 text-slate-600 px-2.5 py-1 rounded-full">
+                <span>{s.icon}</span>
+                <strong>{s.label}</strong>
+                <span className="text-slate-400">— {s.desc}</span>
+              </span>
+            ))}
+          </div>
+          <p className="text-xs text-slate-400 mt-2">
+            Scanner runs daily at 10am UTC. Items are summarized by Claude AI and classified by urgency.
           </p>
         </div>
         {!loading && !upgradeRequired && items.length > 0 && (

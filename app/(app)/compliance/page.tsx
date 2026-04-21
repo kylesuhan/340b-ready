@@ -32,6 +32,7 @@ interface ComplianceItem {
 
 type UrgencyFilter = 'all' | 'action-required' | 'deadline' | 'informational'
 type ReviewStatus = 'unread' | 'reviewed' | 'actioned' | 'dismissed'
+type ViewTab = 'list' | 'calendar'
 
 function formatDate(dateStr: string | null): string {
   if (!dateStr) return ''
@@ -93,7 +94,6 @@ function SkeletonCard() {
       </div>
       <div className="h-3 bg-slate-100 rounded w-full" />
       <div className="h-3 bg-slate-100 rounded w-5/6" />
-      <div className="h-3 bg-slate-100 rounded w-4/6" />
       <div className="flex gap-2 pt-1">
         <div className="h-7 w-28 bg-slate-100 rounded-lg" />
         <div className="h-7 w-20 bg-slate-100 rounded-lg" />
@@ -108,18 +108,30 @@ function ComplianceCard({
   onReview,
 }: {
   item: ComplianceItem
-  onReview: (id: string, status: ReviewStatus) => Promise<void>
+  onReview: (id: string, status: ReviewStatus, notes?: string) => Promise<void>
 }) {
   const [reviewing, setReviewing] = useState<ReviewStatus | null>(null)
+  const [notes, setNotes] = useState(item.review?.notes ?? '')
+  const [notesOpen, setNotesOpen] = useState(false)
+  const [notesSaving, setNotesSaving] = useState(false)
   const currentStatus = item.review?.status ?? 'unread'
 
   async function handleReview(status: ReviewStatus) {
     if (reviewing) return
     setReviewing(status)
     try {
-      await onReview(item.id, status)
+      await onReview(item.id, status, notes || undefined)
     } finally {
       setReviewing(null)
+    }
+  }
+
+  async function saveNotes() {
+    setNotesSaving(true)
+    try {
+      await onReview(item.id, currentStatus, notes)
+    } finally {
+      setNotesSaving(false)
     }
   }
 
@@ -157,10 +169,7 @@ function ComplianceCard({
       {item.affected_entities.length > 0 && (
         <div className="flex flex-wrap gap-1.5">
           {item.affected_entities.map((entity) => (
-            <span
-              key={entity}
-              className="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full"
-            >
+            <span key={entity} className="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full">
               {entity}
             </span>
           ))}
@@ -199,8 +208,37 @@ function ComplianceCard({
         </div>
       )}
 
+      {/* Notes section */}
+      <div className="border-t border-slate-100 pt-3">
+        <button
+          onClick={() => setNotesOpen((o) => !o)}
+          className="text-xs text-slate-400 hover:text-brand-navy transition-colors flex items-center gap-1"
+        >
+          {notesOpen ? '▲' : '▼'}{' '}
+          {item.review?.notes ? 'Internal notes (saved)' : 'Add internal notes'}
+        </button>
+        {notesOpen && (
+          <div className="mt-2 space-y-2">
+            <textarea
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Record internal actions taken, assigned to, follow-up needed…"
+              rows={3}
+              className="w-full text-xs border border-slate-200 rounded-lg p-2.5 text-slate-700 placeholder-slate-300 resize-none focus:outline-none focus:ring-1 focus:ring-brand-teal"
+            />
+            <button
+              onClick={saveNotes}
+              disabled={notesSaving}
+              className="text-xs bg-brand-pale border border-brand-pale-dark text-brand-navy font-medium px-3 py-1.5 rounded-lg hover:bg-brand-cyan transition-colors disabled:opacity-60"
+            >
+              {notesSaving ? 'Saving…' : 'Save notes'}
+            </button>
+          </div>
+        )}
+      </div>
+
       {/* Action buttons */}
-      <div className="flex gap-2 pt-1 flex-wrap">
+      <div className="flex gap-2 flex-wrap">
         {actionButtons.map(({ status, label }) => {
           const isActive = currentStatus === status
           const isLoading = reviewing === status
@@ -224,11 +262,139 @@ function ComplianceCard({
   )
 }
 
+// ── Calendar view ────────────────────────────────────────────────────────────
+
+function CalendarView({ items }: { items: ComplianceItem[] }) {
+  const dated = items
+    .filter((i) => i.effective_date || i.publication_date)
+    .map((i) => ({ ...i, sortDate: i.effective_date ?? i.publication_date! }))
+    .sort((a, b) => new Date(b.sortDate).getTime() - new Date(a.sortDate).getTime())
+
+  // Group by month
+  const groups: Record<string, typeof dated> = {}
+  for (const item of dated) {
+    const key = new Date(item.sortDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+    if (!groups[key]) groups[key] = []
+    groups[key].push(item)
+  }
+
+  if (dated.length === 0) {
+    return (
+      <div className="border-2 border-dashed border-brand-teal rounded-xl p-8 text-center">
+        <p className="text-brand-teal text-2xl mb-3">📅</p>
+        <p className="text-slate-500 text-sm">No items with dates yet.</p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-8">
+      {Object.entries(groups).map(([month, monthItems]) => (
+        <div key={month}>
+          <h3 className="text-sm font-semibold text-slate-700 mb-3 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-brand-teal inline-block" />
+            {month}
+          </h3>
+          <div className="space-y-2 pl-4 border-l-2 border-brand-pale-dark">
+            {monthItems.map((item) => {
+              const isDeadline = item.urgency === 'deadline'
+              const isAction = item.urgency === 'action-required'
+              return (
+                <div
+                  key={item.id}
+                  className={`bg-white border rounded-xl p-4 flex items-start gap-3 ${
+                    isDeadline ? 'border-amber-200' : isAction ? 'border-red-200' : 'border-slate-100'
+                  }`}
+                >
+                  <div className={`shrink-0 text-center min-w-[42px] rounded-lg p-1.5 ${
+                    isDeadline ? 'bg-amber-50' : isAction ? 'bg-red-50' : 'bg-brand-pale'
+                  }`}>
+                    <p className="text-lg font-bold leading-none text-slate-900">
+                      {new Date(item.sortDate).getDate()}
+                    </p>
+                    <p className="text-xs text-slate-400 uppercase">
+                      {new Date(item.sortDate).toLocaleDateString('en-US', { month: 'short' })}
+                    </p>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start gap-2 flex-wrap">
+                      <a
+                        href={item.source_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-medium text-brand-navy hover:text-brand-teal transition-colors leading-snug"
+                      >
+                        {item.title}
+                      </a>
+                      <UrgencyBadge urgency={item.urgency} />
+                    </div>
+                    <p className="text-xs text-slate-400 mt-0.5">
+                      {item.effective_date ? 'Effective' : 'Published'} {formatDate(item.sortDate)}
+                      {item.source_label ? ` · ${item.source_label}` : ''}
+                    </p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ── Export helper ─────────────────────────────────────────────────────────────
+
+function downloadCSV(items: ComplianceItem[]) {
+  const headers = [
+    'Title',
+    'Source',
+    'Urgency',
+    'Affected Entities',
+    'Publication Date',
+    'Effective Date',
+    'Review Status',
+    'Review Date',
+    'Notes',
+    'Source URL',
+  ]
+
+  const escape = (val: string | null | undefined) => {
+    if (!val) return ''
+    return `"${val.replace(/"/g, '""')}"`
+  }
+
+  const rows = items.map((i) => [
+    escape(i.title),
+    escape(i.source_label),
+    escape(i.urgency),
+    escape(i.affected_entities.join(', ')),
+    escape(i.publication_date),
+    escape(i.effective_date),
+    escape(i.review?.status ?? 'unread'),
+    escape(i.review?.reviewed_at ?? null),
+    escape(i.review?.notes ?? null),
+    escape(i.source_url),
+  ])
+
+  const csv = [headers.join(','), ...rows.map((r) => r.join(','))].join('\n')
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = `340b-compliance-audit-${new Date().toISOString().split('T')[0]}.csv`
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+// ── Main page ─────────────────────────────────────────────────────────────────
+
 export default function CompliancePage() {
   const [items, setItems] = useState<ComplianceItem[]>([])
   const [loading, setLoading] = useState(true)
   const [upgradeRequired, setUpgradeRequired] = useState(false)
   const [filter, setFilter] = useState<UrgencyFilter>('all')
+  const [tab, setTab] = useState<ViewTab>('list')
 
   const loadItems = useCallback(async () => {
     setLoading(true)
@@ -246,19 +412,17 @@ export default function CompliancePage() {
       const data = await res.json()
       setItems(data)
     } catch {
-      // silently fail; items will remain empty
+      // silently fail
     } finally {
       setLoading(false)
     }
   }, [])
 
-  // Call loadItems on mount
   useEffect(() => {
     loadItems()
   }, [loadItems])
 
-  async function handleReview(id: string, status: ReviewStatus) {
-    // Optimistic update
+  async function handleReview(id: string, status: ReviewStatus, notes?: string) {
     setItems((prev) =>
       prev.map((item) =>
         item.id === id
@@ -266,7 +430,7 @@ export default function CompliancePage() {
               ...item,
               review: {
                 status,
-                notes: item.review?.notes ?? null,
+                notes: notes ?? item.review?.notes ?? null,
                 reviewed_at: new Date().toISOString(),
               },
             }
@@ -277,20 +441,18 @@ export default function CompliancePage() {
       await fetch(`/api/compliance/${id}/review`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status }),
+        body: JSON.stringify({ status, notes: notes ?? null }),
       })
     } catch {
-      // If the request fails, reload to get the correct server state
       await loadItems()
     }
   }
 
-  const filteredItems =
-    filter === 'all' ? items : items.filter((i) => i.urgency === filter)
-
+  const filteredItems = filter === 'all' ? items : items.filter((i) => i.urgency === filter)
   const totalCount = items.length
   const actionRequiredCount = items.filter((i) => i.urgency === 'action-required').length
   const unreadCount = items.filter((i) => !i.review || i.review.status === 'unread').length
+  const deadlineCount = items.filter((i) => i.urgency === 'deadline').length
 
   const filterButtons: { value: UrgencyFilter; label: string }[] = [
     { value: 'all', label: 'All' },
@@ -302,13 +464,31 @@ export default function CompliancePage() {
   return (
     <div className="space-y-6">
       {/* Page header */}
-      <div>
-        <h1 className="text-2xl font-bold text-slate-900">
-          <span className="text-brand-teal mr-2">⚕</span>Compliance Monitor
-        </h1>
-        <p className="text-slate-500 mt-1 text-sm">
-          Track 340B regulatory changes from the Federal Register and HRSA.
-        </p>
+      <div className="flex items-start justify-between gap-4 flex-wrap">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900">
+            <span className="text-brand-teal mr-2">⚕</span>Compliance Monitor
+          </h1>
+          <p className="text-slate-500 mt-1 text-sm">
+            Track 340B regulatory changes from the Federal Register and HRSA.
+          </p>
+        </div>
+        {!loading && !upgradeRequired && items.length > 0 && (
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => downloadCSV(items)}
+              className="text-xs font-medium px-3 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-brand-pale hover:border-brand-pale-dark transition-colors flex items-center gap-1.5"
+            >
+              ⬇ Export audit CSV
+            </button>
+            <Link
+              href="/compliance/team"
+              className="text-xs font-medium px-3 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-brand-pale hover:border-brand-pale-dark transition-colors"
+            >
+              👥 Team
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Upgrade prompt */}
@@ -333,20 +513,16 @@ export default function CompliancePage() {
       {/* Loading skeletons */}
       {loading && !upgradeRequired && (
         <>
-          {/* Summary stats skeleton */}
-          <div className="grid grid-cols-3 gap-3 animate-pulse">
-            {[0, 1, 2].map((i) => (
+          <div className="grid grid-cols-4 gap-3 animate-pulse">
+            {[0, 1, 2, 3].map((i) => (
               <div key={i} className="bg-white border border-slate-200 rounded-xl p-4">
                 <div className="h-6 w-8 bg-slate-200 rounded mb-1" />
                 <div className="h-3 w-20 bg-slate-100 rounded" />
               </div>
             ))}
           </div>
-          {/* Card skeletons */}
           <div className="space-y-4">
-            {[0, 1, 2].map((i) => (
-              <SkeletonCard key={i} />
-            ))}
+            {[0, 1, 2].map((i) => (<SkeletonCard key={i} />))}
           </div>
         </>
       )}
@@ -354,8 +530,8 @@ export default function CompliancePage() {
       {/* Loaded state */}
       {!loading && !upgradeRequired && (
         <>
-          {/* Summary stats bar */}
-          <div className="grid grid-cols-3 gap-3">
+          {/* Summary stats */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <div className="bg-white border border-slate-200 rounded-xl p-4">
               <p className="text-2xl font-bold text-brand-navy">{totalCount}</p>
               <p className="text-xs text-slate-500 mt-0.5">Total items</p>
@@ -365,54 +541,78 @@ export default function CompliancePage() {
               <p className="text-xs text-slate-500 mt-0.5">Action required</p>
             </div>
             <div className="bg-white border border-slate-200 rounded-xl p-4">
+              <p className="text-2xl font-bold text-amber-500">{deadlineCount}</p>
+              <p className="text-xs text-slate-500 mt-0.5">Deadlines</p>
+            </div>
+            <div className="bg-white border border-slate-200 rounded-xl p-4">
               <p className="text-2xl font-bold text-brand-teal">{unreadCount}</p>
               <p className="text-xs text-slate-500 mt-0.5">Unread</p>
             </div>
           </div>
 
-          {/* Filter buttons */}
-          <div className="flex flex-wrap gap-2">
-            {filterButtons.map(({ value, label }) => (
+          {/* View tabs */}
+          <div className="flex items-center gap-1 border-b border-slate-200">
+            {(['list', 'calendar'] as ViewTab[]).map((t) => (
               <button
-                key={value}
-                onClick={() => setFilter(value)}
-                className={`text-xs font-medium px-3 py-1.5 rounded-lg transition-colors ${
-                  filter === value
-                    ? 'bg-brand-navy text-white'
-                    : 'bg-white text-brand-navy border border-brand-pale-dark hover:bg-brand-pale'
+                key={t}
+                onClick={() => setTab(t)}
+                className={`text-sm font-medium px-4 py-2.5 border-b-2 transition-colors capitalize ${
+                  tab === t
+                    ? 'border-brand-teal text-brand-navy'
+                    : 'border-transparent text-slate-500 hover:text-slate-700'
                 }`}
               >
-                {label}
+                {t === 'list' ? '☰ List' : '📅 Calendar'}
               </button>
             ))}
           </div>
 
-          {/* Empty state */}
-          {items.length === 0 && (
-            <div className="border-2 border-brand-teal border-dashed rounded-xl p-8 text-center">
-              <p className="text-brand-teal text-2xl mb-3">⚕</p>
-              <p className="text-slate-600 text-sm leading-relaxed max-w-sm mx-auto">
-                No regulatory changes detected yet. The scanner runs daily and will surface new 340B-related Federal Register documents here.
-              </p>
-            </div>
-          )}
+          {/* Calendar view */}
+          {tab === 'calendar' && <CalendarView items={items} />}
 
-          {/* Filtered empty state */}
-          {items.length > 0 && filteredItems.length === 0 && (
-            <div className="bg-white border border-slate-200 rounded-xl p-8 text-center">
-              <p className="text-slate-400 text-sm">
-                No items match the selected filter.
-              </p>
-            </div>
-          )}
+          {/* List view */}
+          {tab === 'list' && (
+            <>
+              {/* Filter buttons */}
+              <div className="flex flex-wrap gap-2">
+                {filterButtons.map(({ value, label }) => (
+                  <button
+                    key={value}
+                    onClick={() => setFilter(value)}
+                    className={`text-xs font-medium px-3 py-1.5 rounded-lg transition-colors ${
+                      filter === value
+                        ? 'bg-brand-navy text-white'
+                        : 'bg-white text-brand-navy border border-brand-pale-dark hover:bg-brand-pale'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
 
-          {/* Items list */}
-          {filteredItems.length > 0 && (
-            <div className="space-y-4">
-              {filteredItems.map((item) => (
-                <ComplianceCard key={item.id} item={item} onReview={handleReview} />
-              ))}
-            </div>
+              {items.length === 0 && (
+                <div className="border-2 border-brand-teal border-dashed rounded-xl p-8 text-center">
+                  <p className="text-brand-teal text-2xl mb-3">⚕</p>
+                  <p className="text-slate-600 text-sm leading-relaxed max-w-sm mx-auto">
+                    No regulatory changes detected yet. The scanner runs daily and will surface new 340B-related Federal Register documents here.
+                  </p>
+                </div>
+              )}
+
+              {items.length > 0 && filteredItems.length === 0 && (
+                <div className="bg-white border border-slate-200 rounded-xl p-8 text-center">
+                  <p className="text-slate-400 text-sm">No items match the selected filter.</p>
+                </div>
+              )}
+
+              {filteredItems.length > 0 && (
+                <div className="space-y-4">
+                  {filteredItems.map((item) => (
+                    <ComplianceCard key={item.id} item={item} onReview={handleReview} />
+                  ))}
+                </div>
+              )}
+            </>
           )}
         </>
       )}

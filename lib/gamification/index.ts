@@ -21,7 +21,7 @@ export const LEVELS = [
 ] as const
 
 export function xpToLevel(xp: number): { level: number; label: string; nextLevelXp: number | null; progress: number } {
-  let current = LEVELS[0]
+  let current: typeof LEVELS[number] = LEVELS[0]
   for (const l of LEVELS) {
     if (xp >= l.min) current = l
   }

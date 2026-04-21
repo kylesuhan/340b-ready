@@ -10,7 +10,7 @@ interface LeaderEntry {
   level: number
   current_streak: number
   leaderboard_opt_in: boolean
-  profiles: { full_name: string | null } | null
+  profiles: { full_name: string | null } | { full_name: string | null }[] | null
 }
 
 export default async function LeaderboardPage() {
@@ -97,7 +97,8 @@ export default async function LeaderboardPage() {
             {(leaders as LeaderEntry[]).map((entry, idx) => {
               const lvl = xpToLevel(entry.xp)
               const isMe = entry.user_id === user.id
-              const displayName = entry.profiles?.full_name ?? 'Anonymous'
+              const profileData = Array.isArray(entry.profiles) ? entry.profiles[0] : entry.profiles
+              const displayName = profileData?.full_name ?? 'Anonymous'
               const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `#${idx + 1}`
               return (
                 <div

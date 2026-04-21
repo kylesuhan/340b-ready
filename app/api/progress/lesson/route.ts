@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
+import { awardXP, updateStreak, XP_VALUES } from '@/lib/gamification'
 
 export async function POST(req: NextRequest) {
   const supabase = await createClient()
@@ -31,18 +33,19 @@ export async function POST(req: NextRequest) {
     .eq('module_id', module_id)
     .single()
 
+  let isNew = false
+
   if (existing) {
     const current: string[] = existing.lessons_completed ?? []
     if (!current.includes(lesson_id)) {
+      isNew = true
       await supabase
         .from('user_progress')
-        .update({
-          lessons_completed: [...current, lesson_id],
-          last_accessed_at: now,
-        })
+        .update({ lessons_completed: [...current, lesson_id], last_accessed_at: now })
         .eq('id', existing.id)
     }
   } else {
+    isNew = true
     await supabase
       .from('user_progress')
       .insert({
@@ -53,6 +56,19 @@ export async function POST(req: NextRequest) {
         quiz_passed: false,
         last_accessed_at: now,
       })
+  }
+
+  // Award XP + update streak for new lesson completions
+  if (isNew) {
+    try {
+      const serviceClient = await createServiceClient()
+      await Promise.all([
+        awardXP(serviceClient, user.id, XP_VALUES.lesson_complete),
+        updateStreak(serviceClient, user.id),
+      ])
+    } catch (err) {
+      console.warn('Gamification update failed (lesson):', err)
+    }
   }
 
   return NextResponse.json({ success: true })

@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import type { SubscriptionRecord } from '@/types/stripe'
 import { hasActiveAccess, trialDaysRemaining, hasComplianceAccess } from '@/types/stripe'
+import { xpToLevel, BADGES } from '@/lib/gamification'
 
 const DIFFICULTY_COLORS: Record<string, string> = {
   basic: 'bg-green-100 text-green-700',
@@ -72,6 +73,21 @@ export default async function DashboardPage() {
     .single()
 
   const name = profile?.full_name ? profile.full_name.split(' ')[0] : user.email?.split('@')[0]
+
+  // Fetch gamification data
+  const { data: gamRow } = await supabase
+    .from('user_gamification')
+    .select('xp, level, current_streak, longest_streak, leaderboard_opt_in')
+    .eq('user_id', user.id)
+    .single()
+
+  const { data: badgeRows } = await supabase
+    .from('user_badges')
+    .select('badge_id')
+    .eq('user_id', user.id)
+
+  const myLevel = xpToLevel(gamRow?.xp ?? 0)
+  const earnedBadgeIds = new Set((badgeRows ?? []).map((b: { badge_id: string }) => b.badge_id))
 
   return (
     <div className="space-y-8">
@@ -176,6 +192,64 @@ export default async function DashboardPage() {
           </Link>
         </div>
       )}
+
+      {/* Gamification panel */}
+      <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-base font-semibold text-slate-900"><span className="text-brand-teal mr-1.5">⚕</span>Your progress</h2>
+          <div className="flex items-center gap-3">
+            <Link href="/leaderboard" className="text-xs text-slate-500 hover:text-slate-700 underline">Leaderboard</Link>
+            <Link href="/certificate" className="text-xs text-slate-500 hover:text-slate-700 underline">Certificate</Link>
+          </div>
+        </div>
+
+        {/* XP + streak row */}
+        <div className="grid grid-cols-3 gap-3">
+          <div className="bg-brand-pale rounded-xl p-3 text-center">
+            <p className="text-xl font-bold text-brand-navy">{gamRow?.xp ?? 0}</p>
+            <p className="text-xs text-slate-500 mt-0.5">XP earned</p>
+          </div>
+          <div className="bg-brand-pale rounded-xl p-3 text-center">
+            <p className="text-xl font-bold text-brand-teal">{myLevel.label}</p>
+            <p className="text-xs text-slate-500 mt-0.5">Level {myLevel.level}</p>
+          </div>
+          <div className="bg-brand-pale rounded-xl p-3 text-center">
+            <p className="text-xl font-bold text-orange-500">🔥 {gamRow?.current_streak ?? 0}</p>
+            <p className="text-xs text-slate-500 mt-0.5">Day streak</p>
+          </div>
+        </div>
+
+        {/* XP progress bar */}
+        <div>
+          <div className="flex items-center justify-between mb-1.5">
+            <p className="text-xs font-medium text-slate-600">Level {myLevel.level} — {myLevel.label}</p>
+            {myLevel.nextLevelXp && (
+              <p className="text-xs text-slate-400">{gamRow?.xp ?? 0} / {myLevel.nextLevelXp} XP</p>
+            )}
+          </div>
+          <div className="w-full bg-slate-100 rounded-full h-2">
+            <div
+              className="bg-brand-teal h-2 rounded-full transition-all"
+              style={{ width: `${myLevel.progress}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Earned badges */}
+        {earnedBadgeIds.size > 0 && (
+          <div>
+            <p className="text-xs font-medium text-slate-500 mb-2">Badges earned</p>
+            <div className="flex flex-wrap gap-2">
+              {Object.values(BADGES).filter(b => earnedBadgeIds.has(b.id)).map(b => (
+                <div key={b.id} title={b.description} className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5">
+                  <span className="text-base">{b.icon}</span>
+                  <span className="text-xs font-medium text-slate-700">{b.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* All modules */}
       <div>

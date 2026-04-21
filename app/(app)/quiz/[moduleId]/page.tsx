@@ -20,6 +20,8 @@ interface QuizResultData {
   correct_count: number
   total_count: number
   pass_threshold: number
+  time_taken_seconds: number | null
+  new_badges: string[]
   results: Array<{
     question_id: string
     question_text: string
@@ -28,6 +30,21 @@ interface QuizResultData {
     is_correct: boolean
     explanation: string | null
   }>
+}
+
+const BADGE_INFO: Record<string, { icon: string; label: string; description: string }> = {
+  first_pass:    { icon: '🎯', label: 'First Pass',    description: 'Passed on your first attempt!' },
+  perfect_score: { icon: '💯', label: 'Perfect Score', description: 'You scored 100%!' },
+  comeback:      { icon: '💪', label: 'Comeback',      description: 'Passed after a previous attempt!' },
+  speed_run:     { icon: '⚡', label: 'Speed Run',     description: 'Finished in under 5 minutes!' },
+  halfway:       { icon: '⚕', label: 'Halfway There', description: 'Completed modules 1–3!' },
+  certified:     { icon: '🏆', label: '340B Ready',    description: 'All 5 modules complete!' },
+}
+
+function formatTime(seconds: number): string {
+  const m = Math.floor(seconds / 60)
+  const s = seconds % 60
+  return m > 0 ? `${m}m ${s}s` : `${s}s`
 }
 
 export default function QuizPage() {
@@ -134,14 +151,14 @@ export default function QuizPage() {
   if (result) {
     const pct = Math.round(result.score * 100)
     const passPct = Math.round(result.pass_threshold * 100)
+    const isPerfect = result.score === 1
+    const isSpeedRun = result.time_taken_seconds !== null && result.time_taken_seconds < 300
 
     return (
       <div className="max-w-2xl mx-auto space-y-6">
         {/* Score card */}
         <div className={`rounded-xl border-2 p-7 text-center ${
-          result.passed
-            ? 'bg-green-50 border-green-300'
-            : 'bg-red-50 border-red-300'
+          result.passed ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
         }`}>
           <div className={`text-5xl font-bold mb-2 ${result.passed ? 'text-green-700' : 'text-red-700'}`}>
             {pct}%
@@ -152,12 +169,64 @@ export default function QuizPage() {
           <p className={`text-sm ${result.passed ? 'text-green-700' : 'text-red-700'}`}>
             {result.correct_count} of {result.total_count} correct · {passPct}% required to pass
           </p>
-          {result.passed && (
-            <p className="text-green-700 text-xs mt-2">
-              The next module is now unlocked.
+          {result.time_taken_seconds !== null && (
+            <p className="text-xs text-slate-500 mt-1">
+              Completed in {formatTime(result.time_taken_seconds)}
+              {isSpeedRun && result.passed && <span className="ml-1 text-amber-600 font-medium">⚡ Speed Run!</span>}
             </p>
           )}
+          {isPerfect && result.passed && (
+            <p className="text-green-700 text-sm font-semibold mt-2">💯 Perfect score!</p>
+          )}
+          {result.passed && !isPerfect && (
+            <p className="text-green-700 text-xs mt-2">The next module is now unlocked.</p>
+          )}
+          {result.passed && result.score === 1 && (
+            <Link
+              href={`/certificate/${moduleId}`}
+              className="inline-block mt-3 text-xs font-medium text-green-700 underline hover:text-green-900"
+            >
+              View & print your certificate →
+            </Link>
+          )}
         </div>
+
+        {/* New badges earned */}
+        {result.new_badges.length > 0 && (
+          <div className="bg-brand-pale border border-brand-cyan-dark rounded-xl p-5">
+            <p className="text-sm font-semibold text-brand-navy mb-3">🎉 Badge{result.new_badges.length > 1 ? 's' : ''} earned!</p>
+            <div className="flex flex-wrap gap-3">
+              {result.new_badges.map((badgeId) => {
+                const b = BADGE_INFO[badgeId]
+                if (!b) return null
+                return (
+                  <div key={badgeId} className="flex items-center gap-2 bg-white border border-brand-pale-dark rounded-xl px-3 py-2">
+                    <span className="text-2xl">{b.icon}</span>
+                    <div>
+                      <p className="text-xs font-bold text-brand-navy">{b.label}</p>
+                      <p className="text-xs text-slate-500">{b.description}</p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* All 5 done — certificate CTA */}
+        {result.new_badges.includes('certified') && (
+          <div className="bg-brand-navy text-white rounded-xl p-6 text-center space-y-3">
+            <p className="text-3xl">🏆</p>
+            <p className="font-bold text-lg">You&apos;re 340B Ready!</p>
+            <p className="text-slate-300 text-sm">You&apos;ve completed all 5 modules. Download your certificate.</p>
+            <Link
+              href="/certificate"
+              className="inline-block bg-white text-brand-navy font-semibold text-sm px-6 py-2.5 rounded-lg hover:bg-slate-100 transition-colors"
+            >
+              Download certificate →
+            </Link>
+          </div>
+        )}
 
         {/* Actions */}
         <div className="flex gap-3 flex-wrap justify-center">
@@ -170,14 +239,14 @@ export default function QuizPage() {
           {result.passed ? (
             <Link
               href="/modules"
-              className="text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2.5 rounded-lg transition-colors"
+              className="text-sm bg-brand-navy hover:bg-brand-navy-dark text-white font-medium px-5 py-2.5 rounded-lg transition-colors"
             >
               View next module →
             </Link>
           ) : (
             <button
               onClick={loadQuiz}
-              className="text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2.5 rounded-lg transition-colors"
+              className="text-sm bg-brand-navy hover:bg-brand-navy-dark text-white font-medium px-5 py-2.5 rounded-lg transition-colors"
             >
               Retry with new questions
             </button>

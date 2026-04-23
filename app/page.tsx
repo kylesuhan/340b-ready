@@ -61,7 +61,7 @@ export default async function HomePage() {
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Image src="/logo.jpeg" alt="340B Ready Trainer" width={120} height={40} style={{ height: '38px', width: 'auto' }} className="object-contain" />
-            <span className="text-xs text-slate-500 hidden sm:inline">Certification Prep</span>
+            <span className="text-xs text-slate-500 hidden sm:inline">340B Learning Platform</span>
           </div>
           <div className="flex items-center gap-3">
             <Link
@@ -83,7 +83,7 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center">
         <div className="inline-block bg-brand-cyan text-brand-navy text-xs font-semibold px-3 py-1 rounded-full mb-6 border border-brand-cyan-dark">
-          ⚕ 340B Drug Pricing Program — Certification Prep
+          ⚕ 340B Drug Pricing Program — 340B Learning Platform
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight mb-5">
           Study smarter for your
@@ -248,7 +248,7 @@ export default async function HomePage() {
           <div className="text-center">
             <p className="text-sm font-semibold text-slate-700 mb-2">340B Ready — by Soul Tribe AI, LLC</p>
             <p className="text-xs text-slate-500 max-w-2xl mx-auto leading-relaxed">
-              <strong>Disclaimer:</strong> 340B Ready is a certification prep study companion for educational purposes only.
+              <strong>Disclaimer:</strong> 340B Ready is a 340B Learning Platform for educational purposes only.
               It is not legal advice, official HRSA guidance, or a substitute for formal training or professional counsel.
               Content may not reflect the most recent regulatory changes. Always verify critical information against current{' '}
               <a

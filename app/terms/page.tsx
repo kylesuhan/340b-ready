@@ -25,7 +25,7 @@ export default function TermsPage() {
           </div>
 
           <p className="text-sm text-slate-600 leading-relaxed">
-            These Terms of Service ("Terms") govern your use of 340B Ready, a certification prep study companion operated by <strong>Soul Tribe AI, LLC</strong> ("Company", "we", "us", or "our"). By creating an account or using the Service, you agree to these Terms.
+            These Terms of Service ("Terms") govern your use of 340B Ready, a 340B Learning Platform operated by <strong>Soul Tribe AI, LLC</strong> ("Company", "we", "us", or "our"). By creating an account or using the Service, you agree to these Terms.
           </p>
 
           <section className="space-y-2">

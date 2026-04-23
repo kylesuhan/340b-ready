@@ -31,7 +31,7 @@ export default async function ComplianceUpgradePage() {
     'Urgency classification (informational / action-required / deadline)',
     'Per-item review tracking (reviewed / actioned / dismissed)',
     'Affected entity tagging (covered entity, manufacturer, TPA, contract pharmacy)',
-    'Everything in the Certification Prep plan (Modules 1–5)',
+    'Everything in the 340B Learning Platform plan (Modules 1–5)',
   ]
 
   return (

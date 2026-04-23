@@ -96,7 +96,7 @@ export default async function DashboardPage() {
         <h1 className="text-2xl font-bold text-slate-900">
           Welcome back{name ? `, ${name}` : ''}
         </h1>
-        <p className="text-slate-500 mt-1 text-sm"><span className="text-brand-teal mr-1">⚕</span> Your 340B certification prep dashboard.</p>
+        <p className="text-slate-500 mt-1 text-sm"><span className="text-brand-teal mr-1">⚕</span> Your 340B Learning Platform dashboard.</p>
       </div>
 
       {/* Subscription / trial notice */}

@@ -33,7 +33,7 @@ export default async function CertificatePage() {
         <p className="text-slate-500 text-sm mt-1">
           {passedCount < 5
             ? `Complete all 5 modules to earn your certificate. You've passed ${passedCount} of 5.`
-            : 'You\'ve completed the 340B Ready certification prep program.'}
+            : 'You\'ve completed the 340B Ready Learning Platform program.'}
         </p>
       </div>
 
@@ -58,7 +58,7 @@ export default async function CertificatePage() {
           >
             <div className="space-y-1">
               <p className="text-xs font-semibold uppercase tracking-widest text-brand-teal">Certificate of Completion</p>
-              <p className="text-xs text-slate-400">340B Ready — Certification Prep Program</p>
+              <p className="text-xs text-slate-400">340B Ready — 340B Learning Platform</p>
             </div>
 
             <div className="text-5xl">⚕</div>
@@ -68,7 +68,7 @@ export default async function CertificatePage() {
               <p className="text-3xl font-bold text-brand-navy">{name}</p>
               <p className="text-sm text-slate-500">has successfully completed all five modules of</p>
               <p className="text-xl font-semibold text-slate-900">340B Drug Pricing Program</p>
-              <p className="text-base text-slate-600">Certification Prep Training</p>
+              <p className="text-base text-slate-600">340B Learning Platform</p>
             </div>
 
             <div className="flex items-center justify-center gap-8 pt-2">

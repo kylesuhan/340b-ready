@@ -102,7 +102,7 @@ export default async function LessonPage({
 
       {/* Disclaimer */}
       <p className="text-xs text-slate-400 italic mb-6 px-1">
-        This content is for certification prep study purposes only. Not legal advice. Verify against current HRSA guidance.
+        This content is for 340B learning purposes only. Not legal advice. Verify against current HRSA guidance.
       </p>
 
       {/* Actions */}

@@ -66,7 +66,7 @@ export default async function UpgradePage() {
 
       <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
         <p className="text-xs text-amber-800 leading-relaxed">
-          <strong>Study companion only.</strong> 340B Ready supports certification prep but is not an
+          <strong>Study companion only.</strong> 340B Ready is a 340B Learning Platform but is not an
           official HRSA product, not legal advice, and not a substitute for formal training or
           professional counsel.
         </p>

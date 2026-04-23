@@ -5,9 +5,9 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: '340B Ready — Certification Prep Companion',
+  title: '340B Ready — 340B Learning Platform',
   description:
-    'A professional study companion for 340B Drug Pricing Program certification preparation. Not legal advice.',
+    'A professional 340B Learning Platform for the 340B Drug Pricing Program. Not legal advice.',
 }
 
 export default function RootLayout({

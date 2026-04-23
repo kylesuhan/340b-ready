@@ -57,7 +57,7 @@ export default async function ModulesPage() {
           const prevProgress = prevModule ? progressMap.get(prevModule.id) : null
           const subscriptionLocked = !m.is_free && !hasAccess
           const quizGateLocked = idx > 0 && !prevProgress?.quiz_passed
-          const isLocked = subscriptionLocked || (idx > 0 && quizGateLocked && !hasAccess)
+          const isLocked = subscriptionLocked || (!subscriptionLocked && quizGateLocked)
           const quizPassed = progress?.quiz_passed ?? false
           const lessonsCompleted = progress?.lessons_completed?.length ?? 0
 

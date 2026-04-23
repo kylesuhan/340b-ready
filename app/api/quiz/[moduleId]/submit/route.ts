@@ -88,37 +88,32 @@ export async function POST(
     })
     .eq('id', attempt_id)
 
-  // If passed, upsert user_progress
+  // If passed, upsert user_progress (preserve existing lessons_completed)
   if (result.passed) {
     const { data: existingProgress } = await supabase
       .from('user_progress')
-      .select('id, lessons_completed')
+      .select('lessons_completed')
       .eq('user_id', user.id)
       .eq('module_id', moduleId)
-      .single()
+      .maybeSingle()
 
-    if (existingProgress) {
-      await supabase
-        .from('user_progress')
-        .update({
-          quiz_passed: true,
-          quiz_passed_at: submittedAt,
-          module_completed: true,
-          last_accessed_at: submittedAt,
-        })
-        .eq('id', existingProgress.id)
-    } else {
-      await supabase
-        .from('user_progress')
-        .insert({
+    const { error: upsertError } = await supabase
+      .from('user_progress')
+      .upsert(
+        {
           user_id: user.id,
           module_id: moduleId,
-          lessons_completed: [],
-          module_completed: true,
+          lessons_completed: existingProgress?.lessons_completed ?? [],
           quiz_passed: true,
           quiz_passed_at: submittedAt,
+          module_completed: true,
           last_accessed_at: submittedAt,
-        })
+        },
+        { onConflict: 'user_id,module_id' }
+      )
+
+    if (upsertError) {
+      console.error('Failed to upsert user_progress after quiz pass:', upsertError)
     }
   }
 

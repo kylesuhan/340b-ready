@@ -47,7 +47,7 @@ export async function canAccessModule(
     .select('quiz_passed')
     .eq('user_id', userId)
     .eq('module_id', prevModule.id)
-    .single()
+    .maybeSingle()
 
   if (!prevProgress?.quiz_passed) {
     return { allowed: false, reason: 'previous_module_quiz_required' }

@@ -91,7 +91,7 @@ export default async function HomePage() {
           340B preparation
         </h1>
         <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-          Five progressive learning modules — easy to expert — built around current HRSA
+          Five progressive learning modules — basic to expert — built around current HRSA
           standards, OPAIS requirements, and real exam topics. Quiz gating keeps you honest.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -139,7 +139,7 @@ export default async function HomePage() {
 
       {/* Modules overview */}
       <section className="max-w-5xl mx-auto px-6 py-12 border-t border-slate-100">
-        <h2 className="text-xl font-semibold text-slate-900 mb-2">5 modules. Easy to expert.</h2>
+        <h2 className="text-xl font-semibold text-slate-900 mb-2">5 modules. Basic to expert.</h2>
         <p className="text-slate-500 text-sm mb-6">Each module must be completed before the next unlocks.</p>
         <div className="space-y-3">
           {MODULES_OVERVIEW.map((m) => (

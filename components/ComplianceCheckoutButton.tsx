@@ -11,14 +11,17 @@ export function ComplianceCheckoutButton() {
     setError(null)
     try {
       const res = await fetch('/api/stripe/compliance-checkout', { method: 'POST' })
+      const data = await res.json()
+      if (res.status === 409 && data.error === 'already_subscribed') {
+        window.location.href = data.billingUrl ?? '/account/billing'
+        return
+      }
       if (!res.ok) {
-        const data = await res.json()
         setError(data.error ?? 'Failed to start checkout')
         setLoading(false)
         return
       }
-      const { url } = await res.json()
-      window.location.href = url
+      window.location.href = data.url
     } catch {
       setError('Something went wrong. Please try again.')
       setLoading(false)

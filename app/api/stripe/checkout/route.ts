@@ -13,13 +13,21 @@ export async function POST(_req: NextRequest) {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
 
-  // Check if we already have a stripe_customer_id for this user
+  // Check if we already have a subscription for this user
   const serviceClient = await createServiceClient()
   const { data: existingSub } = await serviceClient
     .from('subscriptions')
-    .select('stripe_customer_id')
+    .select('stripe_customer_id, status, stripe_subscription_id')
     .eq('user_id', user.id)
     .single()
+
+  // Block duplicate subscriptions
+  if (existingSub?.stripe_subscription_id && ['active', 'trialing'].includes(existingSub.status ?? '')) {
+    return NextResponse.json(
+      { error: 'already_subscribed', billingUrl: `${siteUrl}/account/billing` },
+      { status: 409 }
+    )
+  }
 
   let customerId = existingSub?.stripe_customer_id
 

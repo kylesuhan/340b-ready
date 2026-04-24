@@ -40,10 +40,19 @@ export async function POST(req: NextRequest) {
         break
       }
 
-      case 'customer.subscription.created':
-      case 'customer.subscription.updated': {
+      case 'customer.subscription.created': {
+        // New subscription — always write (this is a fresh checkout)
         const sub = event.data.object as Stripe.Subscription
         await upsertSubscription(serviceClient, sub)
+        break
+      }
+
+      case 'customer.subscription.updated': {
+        // Status/period change on an existing subscription — only apply if it matches
+        // the subscription ID we have on record. Prevents old duplicate subscriptions
+        // from overwriting the current one's status.
+        const sub = event.data.object as Stripe.Subscription
+        await syncSubscriptionIfCurrent(serviceClient, sub)
         break
       }
 
@@ -65,12 +74,13 @@ export async function POST(req: NextRequest) {
         const subscriptionId = invoice.subscription ?? invoice.subscription_id ?? null
         if (subscriptionId) {
           const sub = await stripe.subscriptions.retrieve(subscriptionId as string)
-          await upsertSubscription(serviceClient, sub)
+          await syncSubscriptionIfCurrent(serviceClient, sub)
         }
         break
       }
 
       case 'invoice.payment_failed': {
+        // Already scoped to a specific subscription_id — safe as-is
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const invoice = event.data.object as any
         const subscriptionId = invoice.subscription ?? invoice.subscription_id ?? null
@@ -117,6 +127,37 @@ async function ensureCustomerLinked(
       .from('subscriptions')
       .upsert({ user_id: userId, stripe_customer_id: customerId }, { onConflict: 'user_id' })
   }
+}
+
+/**
+ * Only syncs subscription status/period if the incoming subscription ID matches
+ * what is already stored for the user. This prevents old duplicate subscriptions
+ * from overwriting the current one when they fire status update events.
+ */
+async function syncSubscriptionIfCurrent(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  serviceClient: any,
+  sub: Stripe.Subscription
+) {
+  const customerId = typeof sub.customer === 'string' ? sub.customer : sub.customer.id
+
+  const { data: existing } = await serviceClient
+    .from('subscriptions')
+    .select('user_id, stripe_subscription_id')
+    .eq('stripe_customer_id', customerId)
+    .maybeSingle()
+
+  if (!existing) return // No row for this customer — nothing to update
+
+  if (existing.stripe_subscription_id && existing.stripe_subscription_id !== sub.id) {
+    console.warn(
+      `Skipping status update from old subscription ${sub.id} — current stored sub is ${existing.stripe_subscription_id}`
+    )
+    return
+  }
+
+  // Safe to update — subscription ID matches (or row has no sub ID yet)
+  await upsertSubscription(serviceClient, sub)
 }
 
 async function upsertSubscription(

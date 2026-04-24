@@ -88,7 +88,7 @@ export default async function HomePage() {
         <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 leading-tight mb-5">
           Study smarter for your
           <br />
-          340B certification
+          340B preparation
         </h1>
         <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
           Five progressive learning modules — easy to expert — built around current HRSA
